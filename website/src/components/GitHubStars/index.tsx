@@ -31,7 +31,7 @@ export default function GitHubStars(): React.ReactNode {
 
   useEffect(() => {
     // Получаем данные о репозитории с GitHub API
-    fetch('https://api.github.com/repos/your-username/docs')
+    fetch('https://api.github.com/repos/efremovnv/docs')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -55,7 +55,7 @@ export default function GitHubStars(): React.ReactNode {
 
   if (error || stars === null) {
     return (
-      <a href="https://github.com/your-username/docs" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/efremovnv/docs" target="_blank" rel="noopener noreferrer">
         Поставьте звезду на GitHub
       </a>
     );
@@ -67,7 +67,7 @@ export default function GitHubStars(): React.ReactNode {
   return (
     <div className={styles.githubStarsContainer}>
       <a 
-        href="https://github.com/your-username/docs" 
+        href="https://github.com/efremovnv/docs" 
         target="_blank" 
         rel="noopener noreferrer"
         className={styles.githubStarsLink}

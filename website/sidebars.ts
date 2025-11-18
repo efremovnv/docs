@@ -14,9 +14,19 @@ import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
  */
 
 const sidebars: SidebarsConfig = {
-  // By default, Docusaurus generates a sidebar from the docs folder structure
-  tutorialSidebar: [
-    'intro',
+  // Структура боковой панели для лабораторных работ
+  labsSidebar: [
+    {
+      type: 'category',
+      label: 'Лабораторные работы',
+      items: [
+        'intro',
+        // Здесь будут добавляться лабораторные работы
+        // 'lab1',
+        // 'lab2',
+        // и т.д.
+      ],
+    },
   ],
 };
 
