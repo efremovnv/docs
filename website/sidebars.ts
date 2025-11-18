@@ -17,10 +17,32 @@ const sidebars: SidebarsConfig = {
   // Структура боковой панели для лабораторных работ
   labsSidebar: [
     'intro',
-    // Здесь будут добавляться лабораторные работы
-    // 'lab1',
-    // 'lab2',
-    // и т.д.
+    {
+      type: 'category',
+      label: 'Периферийные устройства',
+      items: [
+        'pe/lab1',
+        'pe/lab2',
+        'pe/lab3',
+        'pe/lab4',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Организация ЭВМ',
+      items: [
+        'oevm/lab7',
+        'oevm/lab8',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Курсовая работа',
+      items: [
+        'course-work/arithmetic-device',
+        'course-work/rp-op-design',
+      ],
+    },
   ],
 };
 
