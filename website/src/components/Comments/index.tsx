@@ -10,9 +10,9 @@ export default function Comments(): JSX.Element {
       <Giscus
         id="comments"
         repo="efremovnv/docs"
-        repoId=""
+        repoId="1095808904"
         category="General"
-        categoryId=""
+        categoryId="DIC_kwDOKqJXps4CgqFh"
         mapping="pathname"
         strict="1"
         reactionsEnabled="1"

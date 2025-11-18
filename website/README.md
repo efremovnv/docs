@@ -43,8 +43,13 @@ npm run deploy
 
 2. **Giscus комментарии** в `src/components/Comments/index.tsx`:
    - `repo` - ваш репозиторий GitHub
-   - `repoId` - ID репозитория (можно получить через GitHub API)
-   - `categoryId` - ID категории для обсуждений
+   - `repoId` - ID репозитория (уже настроено: 1095808904)
+   - `categoryId` - ID категории для обсуждений (уже настроено)
+   
+   **Важно:** Для работы комментариев нужно:
+   1. Включить Discussions в настройках репозитория GitHub (Settings → Features → Discussions)
+   2. Создать категорию "General" в Discussions (если её нет)
+   3. Если categoryId не работает, получить правильный ID на https://giscus.app
 
 3. **GitHub Stars** в `src/components/GitHubStars/index.tsx`:
    - URL репозитория в fetch запросе
