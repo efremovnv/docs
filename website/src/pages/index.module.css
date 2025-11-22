@@ -23,3 +23,49 @@
   gap: 1rem;
 }
 
+.features {
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+  width: 100%;
+  background-color: var(--ifm-background-color);
+}
+
+.sections {
+  padding: 4rem 0;
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+.sections .card {
+  height: 100%;
+  margin-bottom: 1rem;
+}
+
+.sections .card__body ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.sections .card__body li {
+  margin: 0.5rem 0;
+}
+
+.sections .card__body li::before {
+  content: '→ ';
+  color: var(--ifm-color-primary);
+  font-weight: bold;
+}
+
+.quickStart {
+  padding: 4rem 0;
+  background-color: var(--ifm-background-color);
+}
+
+.quickStart ol {
+  padding-left: 1.5rem;
+}
+
+.quickStart li {
+  margin: 0.75rem 0;
+}
+
