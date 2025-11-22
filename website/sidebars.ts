@@ -39,12 +39,11 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Курсовая работа',
       items: [
-        'course-work/arithmetic-device',
-        'course-work/rp-op-design',
+        'course-work/01-rp-op-design',
+        'course-work/02-arithmetic-device',
       ],
     },
   ],
 };
 
 export default sidebars;
-
