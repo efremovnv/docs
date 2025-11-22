@@ -9,7 +9,7 @@ const ALGOLIA_API_KEY = process.env.ALGOLIA_API_KEY || '';
 const config: Config = {
   title: 'efremovnv',
   tagline: 'Документация лабораторных работ',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/logo2.svg',
 
   // Set the production url of your site here
   url: 'https://efremovnv.github.io',
