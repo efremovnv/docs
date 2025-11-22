@@ -150,6 +150,69 @@ export default function DownloadPdfButton() {
             // Клонируем элемент глубоко
             const clonedContent = mainContent.cloneNode(true) as HTMLElement;
 
+            // Находим и извлекаем дату последнего обновления
+            let lastUpdatedDate: string | null = null;
+            const lastUpdatedElement = clonedContent.querySelector(
+                ".theme-last-updated, [class*='last-updated'], [class*='lastUpdated'], time[datetime]"
+            );
+
+            if (lastUpdatedElement) {
+                // Пробуем получить дату из атрибута datetime
+                const datetime = lastUpdatedElement.getAttribute("datetime");
+                if (datetime) {
+                    try {
+                        const date = new Date(datetime);
+                        // Форматируем дату: "14 окт. 2018 г."
+                        const months = [
+                            "янв.",
+                            "февр.",
+                            "мар.",
+                            "апр.",
+                            "мая",
+                            "июня",
+                            "июля",
+                            "авг.",
+                            "сент.",
+                            "окт.",
+                            "нояб.",
+                            "дек.",
+                        ];
+                        const day = date.getDate();
+                        const month = months[date.getMonth()];
+                        const year = date.getFullYear();
+                        lastUpdatedDate = `${day} ${month} ${year} г.`;
+                    } catch (e) {
+                        // Если не получилось распарсить, берем текст
+                        let dateText = lastUpdatedElement.textContent?.trim() || "";
+                        // Убираем "(Simulated during dev for better perf)"
+                        dateText = dateText.replace(
+                            /\(Simulated during dev for better perf\)/gi,
+                            ""
+                        ).trim();
+                        // Убираем "Последнее обновление" и оставляем только дату
+                        dateText = dateText.replace(/Последнее обновление\s*/i, "").trim();
+                        if (dateText) {
+                            lastUpdatedDate = dateText;
+                        }
+                    }
+                } else {
+                    // Если нет datetime, берем текст
+                    let dateText = lastUpdatedElement.textContent?.trim() || "";
+                    // Убираем "(Simulated during dev for better perf)"
+                    dateText = dateText.replace(
+                        /\(Simulated during dev for better perf\)/gi,
+                        ""
+                    ).trim();
+                    // Убираем "Последнее обновление" и оставляем только дату
+                    dateText = dateText.replace(/Последнее обновление\s*/i, "").trim();
+                    if (dateText) {
+                        lastUpdatedDate = dateText;
+                    }
+                }
+                // Удаляем оригинальный элемент, чтобы не дублировался
+                lastUpdatedElement.remove();
+            }
+
             // Удаляем ненужные элементы из клона (но НЕ удаляем кнопку скачивания)
             const elementsToRemove = clonedContent.querySelectorAll(
                 ".navbar, footer, .pagination-nav, aside, .theme-doc-sidebar-container, .theme-doc-toc-desktop, .breadcrumbs, " +
@@ -432,9 +495,23 @@ export default function DownloadPdfButton() {
             // Удаляем фон из всех элементов кода
             const cleanedContent = removeBackgroundFromCode(pdfMakeContent);
 
+            // Добавляем дату обновления в начало документа
+            let finalContent: any = cleanedContent;
+            if (lastUpdatedDate) {
+                // Добавляем дату в начало
+                finalContent = [
+                    {
+                        text: `Последнее обновление: ${lastUpdatedDate}`,
+                        style: "lastUpdated",
+                        margin: [0, 0, 0, 15], // Отступ снизу
+                    },
+                    ...(Array.isArray(cleanedContent) ? cleanedContent : [cleanedContent]),
+                ];
+            }
+
             // Создаем документ с правильными стилями
             const docDefinition = {
-                content: cleanedContent,
+                content: finalContent,
                 defaultStyle: {
                     fontSize: 14,
                     color: "#000000",
@@ -494,6 +571,12 @@ export default function DownloadPdfButton() {
                         italics: true,
                         fillColor: null,
                         background: null,
+                    },
+                    lastUpdated: {
+                        fontSize: 10,
+                        color: "#666666",
+                        italics: true,
+                        alignment: "left",
                     },
                 },
                 pageSize: "A4",
