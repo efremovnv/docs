@@ -153,8 +153,8 @@ export default function DownloadPdfButton() {
             // Удаляем ненужные элементы из клона (но НЕ удаляем кнопку скачивания)
             const elementsToRemove = clonedContent.querySelectorAll(
                 ".navbar, footer, .pagination-nav, aside, .theme-doc-sidebar-container, .theme-doc-toc-desktop, .breadcrumbs, " +
-                    // TOC (Table of Contents)
-                    ".table-of-contents, .toc, [class*='toc'], [class*='table-of-contents'], " +
+                    // TOC (Table of Contents) - только конкретные классы, убрали слишком широкий [class*='toc']
+                    ".table-of-contents, nav.table-of-contents, " +
                     // Иконки кнопок из code blocks (копирование, refresh и т.д.)
                     ".clean-btn, .code-block-button, button[aria-label*='Copy'], button[aria-label*='copy'], " +
                     "[class*='codeBlockButton'], [class*='copyButton'], [class*='cleanButton'], " +
@@ -164,26 +164,50 @@ export default function DownloadPdfButton() {
             );
             elementsToRemove.forEach((el) => el.remove());
 
-            // Удаляем элементы, содержащие текст "Содержание этой страницы" или похожий
+            // Удаляем только навигационные TOC, НЕ разделы статьи с заголовком "Содержание"
             const allElements = clonedContent.querySelectorAll("*");
             allElements.forEach((el) => {
+                // Пропускаем заголовки (h1, h2, h3 и т.д.) - это разделы статьи
+                const isHeading = el.tagName?.match(/^H[1-6]$/);
+                if (isHeading) {
+                    return; // Не удаляем заголовки
+                }
+
                 const text = el.textContent?.trim().toLowerCase();
+
+                // Удаляем только навигационные TOC с конкретными признаками
                 if (
-                    text === "содержание этой страницы" ||
-                    text === "содержание" ||
-                    (text?.includes("содержание") &&
-                        el.querySelector("ul, ol, nav"))
+                    (text === "содержание этой страницы" ||
+                        text === "on this page") &&
+                    (el.classList.contains("toc") ||
+                        el.classList.contains("table-of-contents") ||
+                        el.getAttribute("role") === "navigation" ||
+                        el.closest("nav") ||
+                        el.tagName === "NAV")
                 ) {
-                    // Проверяем, что это действительно TOC, а не обычный список
-                    if (
-                        el.querySelector("ul, ol, nav") ||
-                        el.classList.contains("toc") ||
-                        el.classList.contains("table-of-contents")
-                    ) {
-                        el.remove();
-                    }
+                    el.remove();
                 }
             });
+
+            // Проверка, что контент не пустой после удаления
+            const hasContent =
+                (clonedContent.textContent?.trim().length ?? 0) > 100 ||
+                clonedContent.querySelector(
+                    "h1, h2, h3, p, ul, ol, pre, code, img"
+                );
+
+            if (!hasContent) {
+                console.error("Контент пустой после удаления элементов!", {
+                    textLength: clonedContent.textContent?.trim().length,
+                    htmlLength: clonedContent.innerHTML.length,
+                    hasHeadings: !!clonedContent.querySelector("h1, h2, h3"),
+                    hasParagraphs: !!clonedContent.querySelector("p"),
+                });
+                alert(
+                    "Ошибка: Контент страницы пустой. Возможно, удалены необходимые элементы."
+                );
+                return;
+            }
 
             // Находим все изображения и конвертируем их в dataURL
             const images: Record<string, string> = {};
