@@ -152,9 +152,38 @@ export default function DownloadPdfButton() {
 
             // Удаляем ненужные элементы из клона (но НЕ удаляем кнопку скачивания)
             const elementsToRemove = clonedContent.querySelectorAll(
-                ".navbar, footer, .pagination-nav, aside, .theme-doc-sidebar-container, .theme-doc-toc-desktop, .breadcrumbs"
+                ".navbar, footer, .pagination-nav, aside, .theme-doc-sidebar-container, .theme-doc-toc-desktop, .breadcrumbs, " +
+                    // TOC (Table of Contents)
+                    ".table-of-contents, .toc, [class*='toc'], [class*='table-of-contents'], " +
+                    // Иконки кнопок из code blocks (копирование, refresh и т.д.)
+                    ".clean-btn, .code-block-button, button[aria-label*='Copy'], button[aria-label*='copy'], " +
+                    "[class*='codeBlockButton'], [class*='copyButton'], [class*='cleanButton'], " +
+                    "svg[class*='copy'], svg[class*='refresh'], svg[class*='check'], " +
+                    // Все кнопки внутри code blocks
+                    "pre button, code button, .prism-code button, [class*='prism'] button"
             );
             elementsToRemove.forEach((el) => el.remove());
+
+            // Удаляем элементы, содержащие текст "Содержание этой страницы" или похожий
+            const allElements = clonedContent.querySelectorAll("*");
+            allElements.forEach((el) => {
+                const text = el.textContent?.trim().toLowerCase();
+                if (
+                    text === "содержание этой страницы" ||
+                    text === "содержание" ||
+                    (text?.includes("содержание") &&
+                        el.querySelector("ul, ol, nav"))
+                ) {
+                    // Проверяем, что это действительно TOC, а не обычный список
+                    if (
+                        el.querySelector("ul, ol, nav") ||
+                        el.classList.contains("toc") ||
+                        el.classList.contains("table-of-contents")
+                    ) {
+                        el.remove();
+                    }
+                }
+            });
 
             // Находим все изображения и конвертируем их в dataURL
             const images: Record<string, string> = {};
