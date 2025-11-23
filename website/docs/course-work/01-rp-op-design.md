@@ -465,5 +465,4 @@ A: Каждый способ имеет свои преимущества:
 -   [Документация по мегафункциям Altera (User Guide)](https://www.intel.com/content/www/us/en/docs/programmable/683424/current/introduction-to-megafunctions.html)
 -   [Quartus II Handbook - Memory Blocks](https://www.intel.com/content/www/us/en/programmable/documentation/)
 -   [VHDL Templates in Quartus II](https://www.intel.com/content/www/us/en/programmable/documentation/)
--   [Примеры .mif файлов](https://github.com/efremovnv/docs/tree/main/examples/mif)
 -   [Altera/Intel FPGA Memory Resources](https://www.intel.com/content/www/us/en/programmable/documentation/)
