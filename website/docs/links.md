@@ -22,6 +22,12 @@ description: 'Методичка на yonote для курсовой и ЛР.',
 url: 'https://mafin.yonote.ru/share/evm/doc/metodicheskie-ukazaniya-po-vypolneniyu-kursovoj-raboty-bMFaeB2LTj',
 icon: '🧁'
 },
+{
+title: 'ОЕВМ лабы 1-6',
+description: 'Временная методичка для 6 семестра. Требуется перенести ее на сайт сюда.',
+url: 'https://docs.google.com/document/d/1453wzaNaCJpbv4MH3XgjrgOG0HsHBQcr0_Du_8RMWFc/edit?usp=sharing',
+icon: '🧑‍🌾'
+},
 /*
 // Пример добавления новой ссылки (просто раскомментируйте и заполните):
 {
