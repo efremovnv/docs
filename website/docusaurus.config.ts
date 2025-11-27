@@ -1,6 +1,8 @@
 import { themes as prismThemes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 
 const ALGOLIA_API_KEY = process.env.ALGOLIA_API_KEY || "";
 
@@ -51,6 +53,8 @@ const config: Config = {
                         "https://github.com/efremovnv/docs/edit/main/website/",
                     routeBasePath: "/labs", // Docs will be served at /docs/labs
                     showLastUpdateTime: true,
+                    remarkPlugins: [remarkMath],
+                    rehypePlugins: [rehypeKatex],
                 },
                 blog: false, // Blog is disabled
                 theme: {
