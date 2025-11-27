@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="ru-RU" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-computer-organization/lab-manual-sem6" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.7.0">
+<title data-rh="true">Методическое пособие по лабораторным работам (6 семестр) | efremovnv</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://efremovnv.github.io/docs/img/docusaurus.png"><meta data-rh="true" name="twitter:image" content="https://efremovnv.github.io/docs/img/docusaurus.png"><meta data-rh="true" property="og:url" content="https://efremovnv.github.io/docs/labs/computer-organization/lab-manual-sem6"><meta data-rh="true" property="og:locale" content="ru_RU"><meta data-rh="true" name="docusaurus_locale" content="ru"><meta data-rh="true" name="docsearch:language" content="ru"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Методическое пособие по лабораторным работам (6 семестр) | efremovnv"><meta data-rh="true" name="description" content="Автор: Н.В. Ефремов"><meta data-rh="true" property="og:description" content="Автор: Н.В. Ефремов"><link data-rh="true" rel="icon" href="/docs/img/logo2.svg"><link data-rh="true" rel="canonical" href="https://efremovnv.github.io/docs/labs/computer-organization/lab-manual-sem6"><link data-rh="true" rel="alternate" href="https://efremovnv.github.io/docs/labs/computer-organization/lab-manual-sem6" hreflang="ru-RU"><link data-rh="true" rel="alternate" href="https://efremovnv.github.io/docs/labs/computer-organization/lab-manual-sem6" hreflang="x-default"><link rel="stylesheet" href="/docs/assets/css/styles.ebe7230c.css">
+<script src="/docs/assets/js/runtime~main.44f23b1f.js" defer="defer"></script>
+<script src="/docs/assets/js/main.d93e7320.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/docs/img/logo.svg"><link rel="preload" as="image" href="/docs/img/logo-dark.svg"><div role="region" aria-label="Перейти к основному содержимому"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Перейти к основному содержимому</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Переключить навигационную панель" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/docs/"><div class="navbar__logo"><img src="/docs/img/logo.svg" alt="Логотип" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/docs/img/logo-dark.svg" alt="Логотип" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">efremovnv</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/labs/intro">Методички</a><a class="navbar__item navbar__link" href="/docs/labs/contributing">Контрибьюция</a><a class="navbar__item navbar__link" href="/docs/labs/links">Ссылки</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/efremovnv/docs" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link header-github-link" aria-label="GitHub repository"></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Переключение между темным и светлым режимом (сейчас используется Светлый режим)" aria-label="Переключение между темным и светлым режимом (сейчас используется Светлый режим)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Прокрутка к началу" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/labs/intro">Учебные материалы по организации ЭВМ и систем</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/labs/peripheral-devices/lab-keyboard-ps2">Периферийные устройства</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/docs/labs/computer-organization/additional-labs/lab1-emulator-debug">Организация ЭВМ</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/labs/computer-organization/additional-labs/lab1-emulator-debug">Дополнительные лабы</a></div></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/labs/computer-organization/lab-manual-sem6">Методическое пособие по лабораторным работам (6 семестр)</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/labs/computer-organization/labs-sem7/lab6">Лабораторные работы (7 семестр)</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/labs/computer-organization/theory/jtag-theory">Теория</a></div></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/labs/course-work/rp-op-design">Курсовая работа</a></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Навигационная цепочка текущей страницы"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Главная страница" class="breadcrumbs__link" href="/docs/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">Организация ЭВМ</span><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Методическое пособие по лабораторным работам (6 семестр)</span><meta itemprop="position" content="2"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">Содержание этой страницы</button></div><div class="theme-doc-markdown markdown"><header><h1>Методическое пособие по лабораторным работам (6 семестр)</h1></header>
+<p><strong>Автор:</strong> Н.В. Ефремов<br>
+<strong>Название:</strong> Создание и исследование процессорной системы на кристалле ПЛИС</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="оглавление">Оглавление<a href="#оглавление" class="hash-link" aria-label="Прямая ссылка на Оглавление" title="Прямая ссылка на Оглавление">​</a></h2>
+<ul>
+<li><a href="#%D0%B2%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5">Введение</a></li>
+<li><a href="#%D0%BB%D0%B0%D0%B1%D0%BE%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%BD%D0%B0%D1%8F-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-1">Лабораторная работа 1. Учебно-отладочный стенд Intel DE 2-115</a></li>
+<li><a href="#%D0%BB%D0%B0%D0%B1%D0%BE%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%BD%D0%B0%D1%8F-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-2">Лабораторная работа 2. Архитектура системы команд процессора NIOS II</a></li>
+<li><a href="#%D0%BB%D0%B0%D0%B1%D0%BE%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%BD%D0%B0%D1%8F-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-3">Лабораторная работа 3. Представление символьной информации и вывод на LCD</a></li>
+<li><a href="#%D0%BB%D0%B0%D0%B1%D0%BE%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%BD%D0%B0%D1%8F-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-4">Лабораторная работа 4. Выделенный доступ к памяти в RISC процессорах</a></li>
+<li><a href="#%D0%BB%D0%B0%D0%B1%D0%BE%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%BD%D0%B0%D1%8F-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-5">Лабораторная работа 5. Взаимодействие программных компонентов</a></li>
+<li><a href="#%D0%BB%D0%B0%D0%B1%D0%BE%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%BD%D0%B0%D1%8F-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0-6">Лабораторная работа 6. Ввод/вывод информации с использованием прерываний</a></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="введение">Введение<a href="#введение" class="hash-link" aria-label="Прямая ссылка на Введение" title="Прямая ссылка на Введение">​</a></h2>
+<p>Одной из профессиональных компетенций, которыми должны овладеть студенты, освоившие программу бакалавриата по направлению 09.03.01, является умение разрабатывать аппаратные и программные компоненты информационно вычислительных систем.</p>
+<p>В формирование этой компетенции существенный вклад вносит дисциплина «Организация ЭВМ и систем», изучаемая в шестом и седьмом семестрах. Для выработки практических навыков у студентов предусмотрено выполнение цикла лабораторных работ в компьютерном классе, оборудованном учебно-отладочными стендами «Altera DE 2-70» и «Intel DE 2-115».</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="условные-обозначения-и-сокращения">Условные обозначения и сокращения<a href="#условные-обозначения-и-сокращения" class="hash-link" aria-label="Прямая ссылка на Условные обозначения и сокращения" title="Прямая ссылка на Условные обозначения и сокращения">​</a></h3>
+<ul>
+<li><strong>АЛУ</strong> – арифметико-логическое устройство</li>
+<li><strong>АСК</strong> – архитектура системы команд</li>
+<li><strong>ПЛИС</strong> – программируемая логическая интегральная схема</li>
+<li><strong>ПО</strong> – программное обеспечение</li>
+<li><strong>САПР</strong> – система автоматизации проектирования</li>
+<li><strong>ЭВМ</strong> – электронная вычислительная машина</li>
+<li><strong>IMP</strong> – Intel Monitor Programm – приложение для реализации и отладки процессорных систем</li>
+<li><strong>NIOS II</strong> – 32-разрядный процессор второго поколения</li>
+<li><strong>LCD</strong> – Liquid Crystal Display - жидкокристаллический дисплей</li>
+<li><strong>VGA</strong> – Video Graphics Array - компонентный интерфейс</li>
+<li><strong>UART</strong> – Universal Asynchronous Receiver Transmitter</li>
+<li><strong>RISC</strong> – Reduced Instruction Set Computer</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="лабораторная-работа-1">Лабораторная работа 1<a href="#лабораторная-работа-1" class="hash-link" aria-label="Прямая ссылка на Лабораторная работа 1" title="Прямая ссылка на Лабораторная работа 1">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="учебно-отладочный-стенд-intel-de-2-115-приложение-intel-monitor-program-imp-для-работы-со-стендом">Учебно-отладочный стенд «Intel DE 2-115». Приложение Intel Monitor Program (IMP) для работы со стендом<a href="#учебно-отладочный-стенд-intel-de-2-115-приложение-intel-monitor-program-imp-для-работы-со-стендом" class="hash-link" aria-label="Прямая ссылка на Учебно-отладочный стенд «Intel DE 2-115». Приложение Intel Monitor Program (IMP) для работы со стендом" title="Прямая ссылка на Учебно-отладочный стенд «Intel DE 2-115». Приложение Intel Monitor Program (IMP) для работы со стендом">​</a></h3>
+<p><strong>Цель работы:</strong> Приобретение навыков, необходимых для выполнения лабораторных работ по дисциплине «Организация ЭВМ и систем» с использованием стендов Intel DE 2-115 с помощью приложения Intel Monitor Program (IMP).</p>
+<p><strong>Объекты изучения:</strong></p>
+<ul>
+<li>учебно-отладочный стенд Intel DE 2-115</li>
+<li>приложение Intel Monitor Program (IMP)</li>
+<li>процессорная система DE 2-115 Media Computer и её периферийные устройства</li>
+</ul>
+<p><strong>Планируемые результаты обучения:</strong></p>
+<p>После выполнения этой работы студенты будут знать:</p>
+<ul>
+<li>Какие компоненты включены в состав учебно-отладочного стенда DE2-115</li>
+<li>Какие ресурсы содержатся в кристалле ПЛИС</li>
+</ul>
+<p>Смогут:</p>
+<ul>
+<li>Подключать учебно-отладочный стенд DE 2-115 к инструментальному компьютеру</li>
+<li>Создавать новые проекты в приложении IMP</li>
+<li>Загружать процессорную систему в кристалл ПЛИС стенда</li>
+<li>Определять состояния кнопок и ползунковых переключателей и управлять индикаторами</li>
+</ul>
+<p><strong>Порядок выполнения лабораторной работы:</strong></p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-1-подключение-стенда-и-запуск-приложения-imp">Часть 1. Подключение стенда и запуск приложения IMP<a href="#часть-1-подключение-стенда-и-запуск-приложения-imp" class="hash-link" aria-label="Прямая ссылка на Часть 1. Подключение стенда и запуск приложения IMP" title="Прямая ссылка на Часть 1. Подключение стенда и запуск приложения IMP">​</a></h4>
+<ol>
+<li>Подключите стенд к сети питания с переменным напряжением 220 вольт</li>
+<li>Подключите стенд к инструментальному компьютеру, используя крайний слева разъем USB (типа В)</li>
+<li>Подайте питание в стенд, нажав красную кнопку в верхней левой части стенда</li>
+<li>Запустите приложение Intel Monitor Program (IMP)</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-2-создание-нового-проекта-в-imp">Часть 2. Создание нового проекта в IMP<a href="#часть-2-создание-нового-проекта-в-imp" class="hash-link" aria-label="Прямая ссылка на Часть 2. Создание нового проекта в IMP" title="Прямая ссылка на Часть 2. Создание нового проекта в IMP">​</a></h4>
+<ol>
+<li>В меню File приложения IMP выполните команду New Project</li>
+<li>Выберите процессорную систему «DE2-115 Media Computer»</li>
+<li>Определите тип используемой программы (Assembly Program)</li>
+<li>Определите исходные файлы используемой в проекте программы</li>
+<li>Определите параметры системы</li>
+<li>Определите установки памяти процессорной системы</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-3-реализация-процессорной-системы-в-учебном-стенде">Часть 3. Реализация процессорной системы в учебном стенде<a href="#часть-3-реализация-процессорной-системы-в-учебном-стенде" class="hash-link" aria-label="Прямая ссылка на Часть 3. Реализация процессорной системы в учебном стенде" title="Прямая ссылка на Часть 3. Реализация процессорной системы в учебном стенде">​</a></h4>
+<ol>
+<li>Загрузите конфигурационный файл процессорной системы в кристалл ПЛИС</li>
+<li>Загрузите программу в память процессорной системы</li>
+<li>Запустите программу и проверьте правильность её выполнения</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-4-использование-приложения-imp-для-работы-с-портами-ввода-вывода">Часть 4. Использование приложения IMP для работы с портами ввода-вывода<a href="#часть-4-использование-приложения-imp-для-работы-с-портами-ввода-вывода" class="hash-link" aria-label="Прямая ссылка на Часть 4. Использование приложения IMP для работы с портами ввода-вывода" title="Прямая ссылка на Часть 4. Использование приложения IMP для работы с портами ввода-вывода">​</a></h4>
+<ol>
+<li>Откройте вкладку Memory основного окна IMP</li>
+<li>Наблюдайте состояние переключателей и кнопок стенда</li>
+<li>Управляйте зелеными и красными светодиодами</li>
+<li>Управляйте сегментами индикаторов шестнадцатеричной цифры</li>
+</ol>
+<p><strong>Отчетные материалы:</strong></p>
+<p>Отчетные материалы должны содержать:</p>
+<ul>
+<li>Цель лабораторной работы</li>
+<li>Материалы, связанные с подготовкой к работе</li>
+<li>Информацию по выполнению каждого пункта задания</li>
+<li>Краткое заключение</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="лабораторная-работа-2">Лабораторная работа 2<a href="#лабораторная-работа-2" class="hash-link" aria-label="Прямая ссылка на Лабораторная работа 2" title="Прямая ссылка на Лабораторная работа 2">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="архитектура-системы-команд-процессора-nios-ii">Архитектура системы команд процессора NIOS II<a href="#архитектура-системы-команд-процессора-nios-ii" class="hash-link" aria-label="Прямая ссылка на Архитектура системы команд процессора NIOS II" title="Прямая ссылка на Архитектура системы команд процессора NIOS II">​</a></h3>
+<p><strong>Цель работы:</strong> Изучение архитектуры системы команд (АСК) процессора NIOS II, приобретение навыков создания новых программных компонентов и их отладки.</p>
+<p><strong>Объекты изучения:</strong></p>
+<ul>
+<li>Архитектура системы команд процессора «NIOS II»</li>
+<li>Типы и форматы его команд</li>
+<li>Используемые способы адресации операндов</li>
+<li>Форматы представления числовой и символьной информации</li>
+</ul>
+<p><strong>Порядок выполнения лабораторной работы:</strong></p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-1-использование-приложения-imp-для-компиляции-загрузки-и-отладки-программы">Часть 1. Использование приложения IMP для компиляции, загрузки и отладки программы<a href="#часть-1-использование-приложения-imp-для-компиляции-загрузки-и-отладки-программы" class="hash-link" aria-label="Прямая ссылка на Часть 1. Использование приложения IMP для компиляции, загрузки и отладки программы" title="Прямая ссылка на Часть 1. Использование приложения IMP для компиляции, загрузки и отладки программы">​</a></h4>
+<ol>
+<li>Откройте проект, созданный в первой лабораторной работе</li>
+<li>Выполните компиляцию и загрузку новой программы</li>
+<li>Найдите в ОП загруженную программу и исходные данные</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-2-представление-числовой-информации-в-процессорной-системе-форматы-команд">Часть 2. Представление числовой информации в процессорной системе. Форматы команд<a href="#часть-2-представление-числовой-информации-в-процессорной-системе-форматы-команд" class="hash-link" aria-label="Прямая ссылка на Часть 2. Представление числовой информации в процессорной системе. Форматы команд" title="Прямая ссылка на Часть 2. Представление числовой информации в процессорной системе. Форматы команд">​</a></h4>
+<ol>
+<li>Измените переменную N, задающую количество чисел в списке</li>
+<li>Внесите изменения в программу для вывода найденного максимального числа на красные светодиоды</li>
+<li>Найдите в ОП команду условного перехода bge и исследуйте её машинный код</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-3-представление-символьной-информации-в-процессорной-системе">Часть 3. Представление символьной информации в процессорной системе<a href="#часть-3-представление-символьной-информации-в-процессорной-системе" class="hash-link" aria-label="Прямая ссылка на Часть 3. Представление символьной информации в процессорной системе" title="Прямая ссылка на Часть 3. Представление символьной информации в процессорной системе">​</a></h4>
+<ol>
+<li>Добавьте в исходный код программы текстовую строку с вашей фамилией, именем и отчеством</li>
+<li>Найдите в ОП добавленную текстовую строку</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-4-раздельное-размещение-кода-и-данных-в-памяти-процессорной-системы">Часть 4. Раздельное размещение кода и данных в памяти процессорной системы<a href="#часть-4-раздельное-размещение-кода-и-данных-в-памяти-процессорной-системы" class="hash-link" aria-label="Прямая ссылка на Часть 4. Раздельное размещение кода и данных в памяти процессорной системы" title="Прямая ссылка на Часть 4. Раздельное размещение кода и данных в памяти процессорной системы">​</a></h4>
+<ol>
+<li>С помощью директивы .data локализуйте область данных программы в отдельной секции</li>
+<li>Экспериментально определите, как работает директива ассемблера .org</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-5-форматы-чисел">Часть 5. Форматы чисел<a href="#часть-5-форматы-чисел" class="hash-link" aria-label="Прямая ссылка на Часть 5. Форматы чисел" title="Прямая ссылка на Часть 5. Форматы чисел">​</a></h4>
+<ol>
+<li>Внесите изменения в программу для представления чисел в формате полуслов</li>
+<li>Внесите изменения в программу для представления чисел в формате байт</li>
+</ol>
+<p><strong>Отчетные материалы:</strong></p>
+<p>Отчетные материалы должны содержать:</p>
+<ul>
+<li>Цель лабораторной работы</li>
+<li>Материалы, связанные с подготовкой к работе</li>
+<li>Информацию по выполнению каждого пункта задания</li>
+<li>Разбор формата команд условного и безусловного переходов</li>
+<li>Листинги подготовленных и отлаженных программ</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="лабораторная-работа-3">Лабораторная работа 3<a href="#лабораторная-работа-3" class="hash-link" aria-label="Прямая ссылка на Лабораторная работа 3" title="Прямая ссылка на Лабораторная работа 3">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="представление-символьной-информации-в-процессорной-системе-и-вывод-её-на-lcd-дисплей">Представление символьной информации в процессорной системе и вывод её на LCD дисплей<a href="#представление-символьной-информации-в-процессорной-системе-и-вывод-её-на-lcd-дисплей" class="hash-link" aria-label="Прямая ссылка на Представление символьной информации в процессорной системе и вывод её на LCD дисплей" title="Прямая ссылка на Представление символьной информации в процессорной системе и вывод её на LCD дисплей">​</a></h3>
+<p><strong>Цель работы:</strong> Изучить, как символьная информация представляется в памяти процессорной системы, директивы ассемблера для работы с символьной информацией, научиться выводить её на LCD дисплей стенда.</p>
+<p><strong>Объекты изучения:</strong></p>
+<ul>
+<li>жидкокристаллический LCD дисплей, входящий в состав стенда</li>
+<li>контроллер LCD дисплея</li>
+<li>приложение Intel Monitor Program (IMP)</li>
+</ul>
+<p><strong>Порядок выполнения лабораторной работы:</strong></p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-1-исследование-команд-управления-lcd-дисплеем">Часть 1. Исследование команд управления LCD дисплеем<a href="#часть-1-исследование-команд-управления-lcd-дисплеем" class="hash-link" aria-label="Прямая ссылка на Часть 1. Исследование команд управления LCD дисплеем" title="Прямая ссылка на Часть 1. Исследование команд управления LCD дисплеем">​</a></h4>
+<ol>
+<li>Выполните очистку LCD-дисплея</li>
+<li>Отправьте в регистр данных LCD порта ASCII код заглавной буквы вашей фамилии</li>
+<li>Экспериментально определите возможности команды настройки режима вывода текста</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-2-программное-управление-lcd-дисплеем">Часть 2. Программное управление LCD дисплеем<a href="#часть-2-программное-управление-lcd-дисплеем" class="hash-link" aria-label="Прямая ссылка на Часть 2. Программное управление LCD дисплеем" title="Прямая ссылка на Часть 2. Программное управление LCD дисплеем">​</a></h4>
+<ol>
+<li>Скомпилируйте программу lab_lcd.s и загрузите в память процессорной системы</li>
+<li>Выполните программу по шагам, осмысливая производимые ею действия</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-3-вывод-символьной-информации-на-lcd-в-режиме-бегущей-строки">Часть 3. Вывод символьной информации на LCD в режиме бегущей строки<a href="#часть-3-вывод-символьной-информации-на-lcd-в-режиме-бегущей-строки" class="hash-link" aria-label="Прямая ссылка на Часть 3. Вывод символьной информации на LCD в режиме бегущей строки" title="Прямая ссылка на Часть 3. Вывод символьной информации на LCD в режиме бегущей строки">​</a></h4>
+<ol>
+<li>Модифицируйте программу таким образом, чтобы информация на экране LCD выводилась в режиме бегущей строки</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-4-создание-специализированных-символов">Часть 4. Создание специализированных символов<a href="#часть-4-создание-специализированных-символов" class="hash-link" aria-label="Прямая ссылка на Часть 4. Создание специализированных символов" title="Прямая ссылка на Часть 4. Создание специализированных символов">​</a></h4>
+<ol>
+<li>Создайте изображение восьми специализированных символов в формате 8 на 5 клеток</li>
+<li>Выполните кодирование символов костяшек и буквы греческого алфавита</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-5-вывод-специализированных-символов-на-экран-lcd-в-заданной-последовательности-с-использованием-кнопок">Часть 5. Вывод специализированных символов на экран LCD в заданной последовательности с использованием кнопок<a href="#часть-5-вывод-специализированных-символов-на-экран-lcd-в-заданной-последовательности-с-использованием-кнопок" class="hash-link" aria-label="Прямая ссылка на Часть 5. Вывод специализированных символов на экран LCD в заданной последовательности с использованием кнопок" title="Прямая ссылка на Часть 5. Вывод специализированных символов на экран LCD в заданной последовательности с использованием кнопок">​</a></h4>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-6-экспериментальное-определение-кодов-букв-русского-алфавита">Часть 6. Экспериментальное определение кодов букв русского алфавита<a href="#часть-6-экспериментальное-определение-кодов-букв-русского-алфавита" class="hash-link" aria-label="Прямая ссылка на Часть 6. Экспериментальное определение кодов букв русского алфавита" title="Прямая ссылка на Часть 6. Экспериментальное определение кодов букв русского алфавита">​</a></h4>
+<ol>
+<li>Используя директиву .asciz, определите коды букв русского алфавита</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-7-вывод-русскоязычного-текста-на-экран-lcd">Часть 7. Вывод русскоязычного текста на экран LCD<a href="#часть-7-вывод-русскоязычного-текста-на-экран-lcd" class="hash-link" aria-label="Прямая ссылка на Часть 7. Вывод русскоязычного текста на экран LCD" title="Прямая ссылка на Часть 7. Вывод русскоязычного текста на экран LCD">​</a></h4>
+<ol>
+<li>Выведите на экран LCD ваши фамилию, имя и отчество с использованием прописных букв русского алфавита</li>
+</ol>
+<p><strong>Отчетные материалы:</strong></p>
+<p>Отчетные материалы должны содержать:</p>
+<ul>
+<li>Цель лабораторной работы</li>
+<li>Материалы, связанные с подготовкой к работе</li>
+<li>Информацию по выполнению каждого пункта задания</li>
+<li>Подготовленные и отлаженные фрагменты программ</li>
+<li>Краткое заключение</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="лабораторная-работа-4">Лабораторная работа 4<a href="#лабораторная-работа-4" class="hash-link" aria-label="Прямая ссылка на Лабораторная работа 4" title="Прямая ссылка на Лабораторная работа 4">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="выделенный-доступ-к-памяти-в-risc-процессорах-тестирование-компонентов-оп-в-процессорной-системе">Выделенный доступ к памяти в RISC процессорах. Тестирование компонентов ОП в процессорной системе<a href="#выделенный-доступ-к-памяти-в-risc-процессорах-тестирование-компонентов-оп-в-процессорной-системе" class="hash-link" aria-label="Прямая ссылка на Выделенный доступ к памяти в RISC процессорах. Тестирование компонентов ОП в процессорной системе" title="Прямая ссылка на Выделенный доступ к памяти в RISC процессорах. Тестирование компонентов ОП в процессорной системе">​</a></h3>
+<p><strong>Цель работы:</strong> Изучить, каким образом выполняется взаимодействие процессора с ОП и с устройствами ввода-вывода, уяснить особенности команд load/store, выполнить тестирование всех компонентов ОП процессорной системы.</p>
+<p><strong>Объекты изучения:</strong></p>
+<ul>
+<li>команды для взаимодействия с ОП и портами ввода-вывода load/store</li>
+<li>компоненты оперативной памяти в процессорной системе</li>
+<li>приложение Intel Monitor Program (IMP)</li>
+</ul>
+<p><strong>Порядок выполнения лабораторной работы:</strong></p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-1-выполнение-команд-сохранения-store-в-процессорной-системе">Часть 1. Выполнение команд сохранения (store) в процессорной системе<a href="#часть-1-выполнение-команд-сохранения-store-в-процессорной-системе" class="hash-link" aria-label="Прямая ссылка на Часть 1. Выполнение команд сохранения (store) в процессорной системе" title="Прямая ссылка на Часть 1. Выполнение команд сохранения (store) в процессорной системе">​</a></h4>
+<ol>
+<li>Напишите фрагмент программы, которая будет сохранять слово в ОП</li>
+<li>Модифицируйте программу для обращения к памяти полусловами</li>
+<li>Модифицируйте программу для обращения к памяти байтами</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-2-выполнение-команд-загрузки-load-в-процессорной-системе">Часть 2. Выполнение команд загрузки (load) в процессорной системе<a href="#часть-2-выполнение-команд-загрузки-load-в-процессорной-системе" class="hash-link" aria-label="Прямая ссылка на Часть 2. Выполнение команд загрузки (load) в процессорной системе" title="Прямая ссылка на Часть 2. Выполнение команд загрузки (load) в процессорной системе">​</a></h4>
+<ol>
+<li>Модифицируйте программу для выполнения чтения из последовательных адресов ОП</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-3-тестирование-всех-типов-оперативной-памяти">Часть 3. Тестирование всех типов оперативной памяти<a href="#часть-3-тестирование-всех-типов-оперативной-памяти" class="hash-link" aria-label="Прямая ссылка на Часть 3. Тестирование всех типов оперативной памяти" title="Прямая ссылка на Часть 3. Тестирование всех типов оперативной памяти">​</a></h4>
+<ol>
+<li>Выполните программу, используя в качестве ОП статическую память</li>
+<li>Проверьте правильность работы программы, используя в качестве ОП динамическую память</li>
+<li>Проверьте правильность работы программы, используя в качестве ОП память, реализованную внутри кристалла</li>
+</ol>
+<p><strong>Отчетные материалы:</strong></p>
+<p>Отчетные материалы должны содержать:</p>
+<ul>
+<li>Цель лабораторной работы</li>
+<li>Материалы, связанные с подготовкой к работе</li>
+<li>Информацию по выполнению каждого пункта задания</li>
+<li>Подготовленные и отлаженные фрагменты программ</li>
+<li>Краткое заключение</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="лабораторная-работа-5">Лабораторная работа 5<a href="#лабораторная-работа-5" class="hash-link" aria-label="Прямая ссылка на Лабораторная работа 5" title="Прямая ссылка на Лабораторная работа 5">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="взаимодействие-программных-компонентов-друг-с-другом-использование-стека-подпрограмм-и-вложенных-процедур">Взаимодействие программных компонентов друг с другом. Использование стека, подпрограмм и вложенных процедур<a href="#взаимодействие-программных-компонентов-друг-с-другом-использование-стека-подпрограмм-и-вложенных-процедур" class="hash-link" aria-label="Прямая ссылка на Взаимодействие программных компонентов друг с другом. Использование стека, подпрограмм и вложенных процедур" title="Прямая ссылка на Взаимодействие программных компонентов друг с другом. Использование стека, подпрограмм и вложенных процедур">​</a></h3>
+<p><strong>Цель работы:</strong> Изучить, каким образом выполняется взаимодействие программных компонентов друг с другом; уяснить, как работает стек и как в процессорной системе можно использовать исходные данные, размещенные в отдельном файле.</p>
+<p><strong>Объекты изучения:</strong></p>
+<ul>
+<li>стек</li>
+<li>команды процессора call, callr, ret</li>
+<li>утилиты Memory fill и Load file into memory приложения IMP</li>
+</ul>
+<p><strong>Порядок выполнения лабораторной работы:</strong></p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-1-передача-параметров-через-регистры-процессора">Часть 1. Передача параметров через регистры процессора<a href="#часть-1-передача-параметров-через-регистры-процессора" class="hash-link" aria-label="Прямая ссылка на Часть 1. Передача параметров через регистры процессора" title="Прямая ссылка на Часть 1. Передача параметров через регистры процессора">​</a></h4>
+<ol>
+<li>Оформите часть кода в виде подпрограммы с именем Max</li>
+<li>Оформите вывод результата на красные светодиоды в виде самостоятельной процедуры Out_on_LEDR</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-2-использование-вложенных-подпрограмм">Часть 2. Использование вложенных подпрограмм<a href="#часть-2-использование-вложенных-подпрограмм" class="hash-link" aria-label="Прямая ссылка на Часть 2. Использование вложенных подпрограмм" title="Прямая ссылка на Часть 2. Использование вложенных подпрограмм">​</a></h4>
+<ol>
+<li>Модифицируйте программу так, чтобы вывод найденного числа на светодиоды выполнялся внутри подпрограммы Max</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-3-передача-параметров-через-стек">Часть 3. Передача параметров через стек<a href="#часть-3-передача-параметров-через-стек" class="hash-link" aria-label="Прямая ссылка на Часть 3. Передача параметров через стек" title="Прямая ссылка на Часть 3. Передача параметров через стек">​</a></h4>
+<ol>
+<li>Модифицируйте программу так, чтобы передача параметров функции Max осуществлялась через стек</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-4-использование-файлов-с-исходными-данными-в-imp">Часть 4. Использование файлов с исходными данными в IMP<a href="#часть-4-использование-файлов-с-исходными-данными-в-imp" class="hash-link" aria-label="Прямая ссылка на Часть 4. Использование файлов с исходными данными в IMP" title="Прямая ссылка на Часть 4. Использование файлов с исходными данными в IMP">​</a></h4>
+<ol>
+<li>Создайте файл и поместите в него список чисел</li>
+<li>Загрузите файл в оперативную память</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-5-компоновка-программы-из-нескольких-файлов">Часть 5. Компоновка программы из нескольких файлов<a href="#часть-5-компоновка-программы-из-нескольких-файлов" class="hash-link" aria-label="Прямая ссылка на Часть 5. Компоновка программы из нескольких файлов" title="Прямая ссылка на Часть 5. Компоновка программы из нескольких файлов">​</a></h4>
+<ol>
+<li>Поместите исходный код подпрограмм Max и Out_on_LEDR в отдельные файлы</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-6-перемещение-кода-программы-в-оп">Часть 6. Перемещение кода программы в ОП<a href="#часть-6-перемещение-кода-программы-в-оп" class="hash-link" aria-label="Прямая ссылка на Часть 6. Перемещение кода программы в ОП" title="Прямая ссылка на Часть 6. Перемещение кода программы в ОП">​</a></h4>
+<ol>
+<li>Напишите процедуру Copy, которая выполняет копирование одной области ОП в другую</li>
+<li>Напишите программу Main, которая будет копировать секцию кода</li>
+</ol>
+<p><strong>Отчетные материалы:</strong></p>
+<p>Отчетные материалы должны содержать:</p>
+<ul>
+<li>Цель лабораторной работы</li>
+<li>Материалы, связанные с подготовкой к работе</li>
+<li>Информацию по выполнению каждого пункта задания</li>
+<li>Написанные фрагменты программ</li>
+<li>Зарисовку ОП с отображением программных компонентов</li>
+<li>Краткое заключение</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="лабораторная-работа-6">Лабораторная работа 6<a href="#лабораторная-работа-6" class="hash-link" aria-label="Прямая ссылка на Лабораторная работа 6" title="Прямая ссылка на Лабораторная работа 6">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="вводвывод-информации-в-процессорной-системе-в-том-числе-с-использованием-прерываний">Ввод/вывод информации в процессорной системе, в том числе с использованием прерываний<a href="#вводвывод-информации-в-процессорной-системе-в-том-числе-с-использованием-прерываний" class="hash-link" aria-label="Прямая ссылка на Ввод/вывод информации в процессорной системе, в том числе с использованием прерываний" title="Прямая ссылка на Ввод/вывод информации в процессорной системе, в том числе с использованием прерываний">​</a></h3>
+<p><strong>Цель работы:</strong> Изучить возможные способы ввода/вывода информации в процессорной системе.</p>
+<p><strong>Объекты изучения:</strong></p>
+<ul>
+<li>подсистема ввода-вывода процессора «NIOS II»</li>
+<li>приложение Intel Monitor Program (IMP)</li>
+</ul>
+<p><strong>Порядок выполнения лабораторной работы:</strong></p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-1-программно-управляемый-ввод-с-переключателей-и-вывод-на-светодиоды">Часть 1. Программно управляемый ввод с переключателей и вывод на светодиоды<a href="#часть-1-программно-управляемый-ввод-с-переключателей-и-вывод-на-светодиоды" class="hash-link" aria-label="Прямая ссылка на Часть 1. Программно управляемый ввод с переключателей и вывод на светодиоды" title="Прямая ссылка на Часть 1. Программно управляемый ввод с переключателей и вывод на светодиоды">​</a></h4>
+<ol>
+<li>Напишите программу на языке ассемблер для ввода с переключателей и вывода на светодиоды</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-2-ввод-информации-с-переключателей-с-опросом-готовности">Часть 2. Ввод информации с переключателей с опросом готовности<a href="#часть-2-ввод-информации-с-переключателей-с-опросом-готовности" class="hash-link" aria-label="Прямая ссылка на Часть 2. Ввод информации с переключателей с опросом готовности" title="Прямая ссылка на Часть 2. Ввод информации с переключателей с опросом готовности">​</a></h4>
+<ol>
+<li>Модифицируйте программу так, чтобы ввод очередного числа осуществлялся только после отпускания кнопки KEY3</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-3-ввод-информации-с-переключателей-в-режиме-прерывания">Часть 3. Ввод информации с переключателей в режиме прерывания<a href="#часть-3-ввод-информации-с-переключателей-в-режиме-прерывания" class="hash-link" aria-label="Прямая ссылка на Часть 3. Ввод информации с переключателей в режиме прерывания" title="Прямая ссылка на Часть 3. Ввод информации с переключателей в режиме прерывания">​</a></h4>
+<ol>
+<li>Используйте вместо опроса готовности формирование прерывания, которое инициируется нажатием кнопки KEY3</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-4-реализация-приоритетных-прерываний">Часть 4. Реализация приоритетных прерываний<a href="#часть-4-реализация-приоритетных-прерываний" class="hash-link" aria-label="Прямая ссылка на Часть 4. Реализация приоритетных прерываний" title="Прямая ссылка на Часть 4. Реализация приоритетных прерываний">​</a></h4>
+<ol>
+<li>Модифицируйте программу так, чтобы по кнопке KEY3 осуществлялось сложение, по KEY2 - вычитание, по KEY1 - обнуление суммы</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="часть-5-программное-прерывание-trap-и-невыполнимые-команды">Часть 5. Программное прерывание trap и невыполнимые команды<a href="#часть-5-программное-прерывание-trap-и-невыполнимые-команды" class="hash-link" aria-label="Прямая ссылка на Часть 5. Программное прерывание trap и невыполнимые команды" title="Прямая ссылка на Часть 5. Программное прерывание trap и невыполнимые команды">​</a></h4>
+<ol>
+<li>Вставьте в текст программы команду trap</li>
+<li>Экспериментально определите поведение программы при выполнении команды mul</li>
+</ol>
+<p><strong>Отчетные материалы:</strong></p>
+<p>Отчетные материалы должны содержать:</p>
+<ul>
+<li>Цель лабораторной работы</li>
+<li>Материалы, связанные с подготовкой к работе</li>
+<li>Информацию по выполнению каждого пункта задания</li>
+<li>Написанные фрагменты программ</li>
+<li>Краткое заключение</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="приложения">Приложения<a href="#приложения" class="hash-link" aria-label="Прямая ссылка на Приложения" title="Прямая ссылка на Приложения">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="приложение-а-форматы-команд-процессора-nios-ii">Приложение А. Форматы команд процессора Nios II<a href="#приложение-а-форматы-команд-процессора-nios-ii" class="hash-link" aria-label="Прямая ссылка на Приложение А. Форматы команд процессора Nios II" title="Прямая ссылка на Приложение А. Форматы команд процессора Nios II">​</a></h3>
+<p>Машинные команды кодируются 32-разрядными словами. В процессоре Nios II используется 3 формата команд:</p>
+<ul>
+<li><strong>I-тип.</strong> Поля A и B, размером 5 бит, используются для указания регистров. Для непосредственных операндов используется поле IMMED16</li>
+<li><strong>R-тип.</strong> Поля A, B и C, размером 5 бит, используются для указания регистров. Поле OPX используется для расширения кода операций</li>
+<li><strong>J-тип.</strong> Данный формат используется для инструкций вызова подпрограмм Call</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="приложение-б-команды-loadstore">Приложение Б. Команды load/store<a href="#приложение-б-команды-loadstore" class="hash-link" aria-label="Прямая ссылка на Приложение Б. Команды load/store" title="Прямая ссылка на Приложение Б. Команды load/store">​</a></h3>
+<p>Команды загрузки/сохранения предназначены для пересылки данных между регистрами общего назначения процессора и оперативной памятью (устройствами ввода/вывода). Они относятся к формату I-типа.</p>
+<p>Основные команды:</p>
+<ul>
+<li><code>ldw</code> (load word) – загрузка слова из ОП</li>
+<li><code>stw</code> (store word) – сохранение слова в ОП</li>
+<li><code>ldb</code> (load byte) – загрузка байта со знаком</li>
+<li><code>ldbu</code> (load byte unsigned) – загрузка байта без знака</li>
+<li><code>ldh</code> (load halfword) – загрузка полуслова со знаком</li>
+<li><code>ldhu</code> (load halfword unsigned) – загрузка полуслова без знака</li>
+</ul>
+<blockquote>
+<p><strong>Примечание:</strong> Полные листинги программ из приложений следует скопировать из исходного документа вручную, так как они содержат большой объем кода.</p>
+</blockquote>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="список-источников">Список источников<a href="#список-источников" class="hash-link" aria-label="Прямая ссылка на Список источников" title="Прямая ссылка на Список источников">​</a></h2>
+<ol>
+<li>Интернет ресурс. DE2-70 Development and Education Board</li>
+<li>Интернет ресурс. DE2-115 Development and Education Board</li>
+<li>Ефремов Н.В., Бородин А.А. Инструментальные средства проектирования и отладки цифровых систем на программируемом кристалле фирмы «Altera». Учебное пособие. – М.: ФГБОУ ВПО МГУЛ, 2012.- 123с.</li>
+<li>Описание ПЛИС Cyclon II от производителя</li>
+<li>Описание ПЛИС Cyclon IV от производителя</li>
+<li>Описание процессорной системы DE 2-70 Media Computer от производителя</li>
+<li>Описание процессорной системы DE 2-115 Media Computer от производителя</li>
+<li>Описание QUARTUS II от производителя</li>
+<li>Ефремов Н.В. Введение в систему автоматизированного проектирования Quartus II. Учебное пособие. – М.: ГОУ ВПО МГУЛ, 2011.-147с.</li>
+<li>Описание IMP от производителя</li>
+<li>Описание АМР. Мануал</li>
+</ol></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/efremovnv/docs/edit/main/website/docs/computer-organization/lab-manual-sem6.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Отредактировать эту страницу</a></div><div class="col lastUpdated_JAkA"><span class="theme-last-updated">Последнее обновление<!-- --> <b><time datetime="2025-11-27T18:36:02.000Z" itemprop="dateModified">27 нояб. 2025 г.</time></b></span></div></div></footer></article><div class="margin-top--lg"><button class="button button--secondary button--sm">📄 Скачать PDF</button></div><nav class="pagination-nav docusaurus-mt-lg" aria-label="Страница документа"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/labs/computer-organization/additional-labs/lab4-paging"><div class="pagination-nav__sublabel">Предыдущая страница</div><div class="pagination-nav__label">Лабораторная работа №4</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/labs/computer-organization/labs-sem7/lab6"><div class="pagination-nav__sublabel">Следующая страница</div><div class="pagination-nav__label">Лабораторная работа №6</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#оглавление" class="table-of-contents__link toc-highlight">Оглавление</a></li><li><a href="#введение" class="table-of-contents__link toc-highlight">Введение</a><ul><li><a href="#условные-обозначения-и-сокращения" class="table-of-contents__link toc-highlight">Условные обозначения и сокращения</a></li></ul></li><li><a href="#лабораторная-работа-1" class="table-of-contents__link toc-highlight">Лабораторная работа 1</a><ul><li><a href="#учебно-отладочный-стенд-intel-de-2-115-приложение-intel-monitor-program-imp-для-работы-со-стендом" class="table-of-contents__link toc-highlight">Учебно-отладочный стенд «Intel DE 2-115». Приложение Intel Monitor Program (IMP) для работы со стендом</a></li></ul></li><li><a href="#лабораторная-работа-2" class="table-of-contents__link toc-highlight">Лабораторная работа 2</a><ul><li><a href="#архитектура-системы-команд-процессора-nios-ii" class="table-of-contents__link toc-highlight">Архитектура системы команд процессора NIOS II</a></li></ul></li><li><a href="#лабораторная-работа-3" class="table-of-contents__link toc-highlight">Лабораторная работа 3</a><ul><li><a href="#представление-символьной-информации-в-процессорной-системе-и-вывод-её-на-lcd-дисплей" class="table-of-contents__link toc-highlight">Представление символьной информации в процессорной системе и вывод её на LCD дисплей</a></li></ul></li><li><a href="#лабораторная-работа-4" class="table-of-contents__link toc-highlight">Лабораторная работа 4</a><ul><li><a href="#выделенный-доступ-к-памяти-в-risc-процессорах-тестирование-компонентов-оп-в-процессорной-системе" class="table-of-contents__link toc-highlight">Выделенный доступ к памяти в RISC процессорах. Тестирование компонентов ОП в процессорной системе</a></li></ul></li><li><a href="#лабораторная-работа-5" class="table-of-contents__link toc-highlight">Лабораторная работа 5</a><ul><li><a href="#взаимодействие-программных-компонентов-друг-с-другом-использование-стека-подпрограмм-и-вложенных-процедур" class="table-of-contents__link toc-highlight">Взаимодействие программных компонентов друг с другом. Использование стека, подпрограмм и вложенных процедур</a></li></ul></li><li><a href="#лабораторная-работа-6" class="table-of-contents__link toc-highlight">Лабораторная работа 6</a><ul><li><a href="#вводвывод-информации-в-процессорной-системе-в-том-числе-с-использованием-прерываний" class="table-of-contents__link toc-highlight">Ввод/вывод информации в процессорной системе, в том числе с использованием прерываний</a></li></ul></li><li><a href="#приложения" class="table-of-contents__link toc-highlight">Приложения</a><ul><li><a href="#приложение-а-форматы-команд-процессора-nios-ii" class="table-of-contents__link toc-highlight">Приложение А. Форматы команд процессора Nios II</a></li><li><a href="#приложение-б-команды-loadstore" class="table-of-contents__link toc-highlight">Приложение Б. Команды load/store</a></li></ul></li><li><a href="#список-источников" class="table-of-contents__link toc-highlight">Список источников</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">efremovnv</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/">Начало</a></li></ul></div><div class="col footer__col"><div class="footer__title">Ресурсы</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/efremovnv/docs" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 efremovnv. Создано с помощью Docusaurus.</div></div></div></footer></div>
+</body>
+</html>
