@@ -130,7 +130,22 @@
 
 ## Приложение 1
 
-![Варианты заданий](image/placeholder.png)
+**Варианты заданий**
+
+| № Варианта | Дискретизация п.4.8 | Разрешение п.4.8 |
+|------------|---------------------|------------------|
+| 1 | 10 | 1/mm |
+| 2 | 20 | 2/mm |
+| 3 | 40 | 4/mm |
+| 4 | 60 | 8/mm |
+| 5 | 80 | 1/mm |
+| 6 | 100 | 2/mm |
+| 7 | 200 | 4/mm |
+| 8 | 80 | 8/mm |
+| 9 | 40 | 1/mm |
+| 10 | 10 | 2/mm |
+| 11 | 60 | 4/mm |
+| 12 | 100 | 8/mm |
 
 ## Приложение 2
 
@@ -145,5 +160,397 @@
 
 ### Листинг программы PS2_X_Y_Packets_Rate_to_JTAG_and_LedR
 
-![Листинг программы PS2_X_Y_Packets_Rate_to_JTAG_and_LedR](image/placeholder.png)
+```assembly
+.equ LED_R, 0xFF200000
+.equ PS2_DATA, 0xFF200100
+.equ TIMER, 0xFF202000
+.equ JTAG_UART_BASE, 0xFF201000
+.equ PACKETS_START, 0x1000
+.equ PACKETS_END, 0x2000
+# Время работы таймера в секундах.
+.equ TIMER_DURATION, 3
+
+.text
+.org 0x20
+handler:
+	# Сохранение регистров.
+	stw ra, (sp)
+	stw r4, -4(sp)
+	stw r8, -8(sp)
+	stw r9, -12(sp)
+	subi sp, sp, 16
+	# Выход, если прерывание не является внешним.
+	rdctl r8, ctl4
+	beq r8, zero, handler_end
+	# Декремент ea на 1 команду.
+	subi ea, ea, 4
+	# Выход, если прерывание не от таймера.
+	andi r8, r8, 0b1
+	beq r8, zero, handler_end
+	# Выход, если программа завершилась.
+	movia r8, PROG_ENDED
+	ldb r8, (r8)
+	bne r8, zero, handler_end
+	# Печать абсолютного смещения по X.
+	movia r4, ABS_X_STR
+	call LOG_STR
+	movia r4, ABS_X
+	ldw r4, (r4)
+	call LOG_NUM
+	call LOG_LINE
+	# Печать абсолютного смещения по Y.
+	movia r4, ABS_Y_STR
+	call LOG_STR
+	movia r4, ABS_Y
+	ldw r4, (r4)
+	call LOG_NUM
+	call LOG_LINE
+	# Печать общего количества считанных пакетов.
+	movia r4, TOTAL_PACKETS_STR
+	call LOG_STR
+	movia r4, TOTAL_PACKETS
+	ldw r4, (r4)
+	call LOG_NUM
+	call LOG_LINE
+	# Печать частоты дискретизаци.
+	movi r8, TIMER_DURATION
+	div r8, r4, r8
+	movia r4, SAMPLING_RATE_STR
+	call LOG_STR
+	mov r4, r8
+	call LOG_NUM
+	call LOG_LINE
+	# Вывод частоты дискретизации на красные светодиоды.
+	movia r8, LED_R
+	stwio r4, (r8)
+	# Установка флага завершения программы.
+	movia r8, PROG_ENDED
+	movi r9, 1
+	stb r9, (r8)
+handler_end:
+	# Восстановление регистров.
+	addi sp, sp, 16
+	ldw ra, (sp)
+	ldw r4, -4(sp)
+	ldw r8, -8(sp)
+	ldw r9, -12(sp)
+	eret
+
+.global _start
+_start:
+	# Начальный адрес стека.
+	movia sp, 0x3FFFFFC
+	# Инициализация переменных.
+	movia r8, ABS_X
+	stw zero, (r8)
+	movia r8, ABS_Y
+	stw zero, (r8)
+	movia r8, TOTAL_PACKETS
+	stw zero, (r8)
+	movia r8, PROG_ENDED
+	stb zero, (r8)
+	# Очистка красных светодиодов.
+	call CLEAR_LED_R
+	# Очистка буфера.
+	call CLEAR_PS2_BUFF
+	# Очистка ОП для записи пакетов.
+	movia r4, PACKETS_START
+	movia r5, PACKETS_END
+	call CLEAR_MEM
+	# Адрес начала регистров таймера.
+	movia r8, TIMER
+	# Остановка таймера.
+	movi r9, 0b1000
+	sthio r9, 0x4(r8)
+	# Сброс поля TO таймера.
+	sthio zero, (r8)
+	# Установка длительности работы таймера = 50МГц * TIMER_DURATION.
+	movia r9, 50000000
+	muli r9, r9, TIMER_DURATION
+	# Запись младшего полуслова длительности.
+	sthio r9, 0x8(r8)
+	# Запись старшего полуслова длительности.
+	srli r9, r9, 16
+	sthio r9, 0xC(r8)
+	# Разрешение внешних прерываний.
+	movi r9, 0b1
+	wrctl status, r9
+	# Разрешение прерываний от таймера.
+	wrctl ienable, r9
+	# Чтение первого пакета мыши в r2.
+	call READ_PS2_PACKET
+	# Запуск таймера STOP = 0, START = 1, CONT = 0, ITO = 1.
+	movi r9, 0b0101
+	sthio r9, 0x4(r8)
+	# Начальный адрес пакетов в ОП в r8.
+	movia r8, PACKETS_START
+	# Общее количество считанных пакетов в r9.
+	mov r9, zero
+	# Абсолютное смещение по X в r10.
+	mov r10, zero
+	# Абсолютное смещение по Y в r11.
+	mov r11, zero
+while:
+	# Адрес записи пакета в ОП.
+	muli r12, r9, 4
+	add r12, r8, r12
+	# Запись пакета в ОП.
+	stw r2, (r12)
+	# Выделение 1 байта с флагами в r12.
+	andi r12, r2, 0xFF
+	# Выделение 2-го байта с относительным смещением по X в r2.
+	srli r2, r2, 8
+	andi r13, r2, 0xFF
+	# Относительное смещение по X со знаком.
+	slli r14, r12, 4
+	andi r14, r14, 0x100
+	sub r13, r13, r14
+	# Увеличение абсолютного смещения по X.
+	add r10, r10, r13
+	movia r13, ABS_X
+	stw r10, (r13)
+	# Выделение 3 байта с относительным смещением по Y.
+	srli r2, r2, 8
+	andi r13, r2, 0xFF
+	# Относительное смещение по Y со знаком.
+	slli r14, r12, 3
+	andi r14, r14, 0x100
+	sub r13, r13, r14
+	# Увеличение абсолютного смещения по Y.
+	add r11, r11, r13
+	movia r13, ABS_Y
+	stw r11, (r13)
+	# Увеличение количества считанных пакетов.
+	addi r9, r9, 1
+	movia r13, TOTAL_PACKETS
+	stw r9, (r13)
+	# Чтение следующего пакета.
+	call READ_PS2_PACKET
+br while
+
+
+
+/* Очищает красные светодиоды. */
+CLEAR_LED_R:
+	# Сохранение регистра.
+	stw r8, (sp)
+	movia r8, LED_R
+	stwio zero, (r8)
+	# Восстановление регистра.
+	ldw r8, (sp)
+	ret
+	
+/* Очищает буфер FIFO. */
+CLEAR_PS2_BUFF:
+	# Сохранение регистров.
+	stw ra, (sp)
+	stw r2, -4(sp)
+	subi sp, sp, 8
+CLEAR_PS2_BUFF_LOOP:
+	# Чтение регистра PS2_Data в r2.
+	call READ_PS2_DATA
+	# Выделение 15 бита RVALID.
+	andi r2, r2, 0x8000
+	# Если RVALID = 1, то продолжаем чтение.
+	bne r2, zero, CLEAR_PS2_BUFF_LOOP
+	# Восстановление регистров.
+	addi sp, sp, 8
+	ldw ra, (sp)
+	ldw r2, -4(sp)
+	ret
+
+/* Очистка области памяти с адреса r4 по r5 */
+CLEAR_MEM:
+	# Сохранение регистра.
+	stw r4, (sp)
+CLEAR_MEM_LOOP:
+	# Очистка памяти.
+	stw zero, (r4)
+	addi r4, r4, 4
+	# Если очистили не всю область памяти, то продолжаем.
+	blt r4, r5, CLEAR_MEM_LOOP
+	# Восстановление регистра.
+	ldw r4, (sp)
+	ret
+	
+/* Записывает значение регистра PS2_Data в r2. */
+READ_PS2_DATA:
+	movia r2, PS2_DATA
+	ldwio r2, (r2)
+	ret
+	
+/* Возвращает байты пакета мыши PS2 в r2. */
+READ_PS2_PACKET:
+	# Сохранение регистров.
+	stw ra, (sp)
+	stw r8, -4(sp)
+	stw r9, -8(sp)
+	stw r10, -12(sp)
+	subi sp, sp, 16
+	# Номер байта в пакете.
+	mov r8, zero
+	# Результат (байты пакета).
+	mov r9, zero
+READ_PS2_PACKET_LOOP:
+	# Чтение регистра PS2_Data в r2.
+	call READ_PS2_DATA
+	# Выделение 15 бита RVALID.
+	srli r10, r2, 15
+	andi r10, r10, 1
+	# Если RVALID = 0, то ожидаем следующий байт.
+	beq r10, zero, READ_PS2_PACKET_LOOP
+	# Выделение поля DATA.
+	andi r2, r2, 0xFF
+	# Сдвиг значения влево на (номер байта * 8 бит).
+	muli r10, r8, 8
+	sll r2, r2, r10
+	# Добавление байта к результату.
+	or r9, r9, r2
+	# Инкремент номера байта.
+	addi r8, r8, 1
+	# Если номер байта < 3, то продолжаем чтение.
+	cmplti r10, r8, 3
+	bne r10, zero, READ_PS2_PACKET_LOOP
+	# Запись результата в r2.
+	mov r2, r9
+	# Восстановление регистров.
+	addi sp, sp, 16
+	ldw ra, (sp)
+	ldw r8, -4(sp)
+	ldw r9, -8(sp)
+	ldw r10, -12(sp)
+	ret
+
+/* Отправляет символ из r4 в JTAG UART. */
+LOG_CHAR:
+	# Сохранение регистров.
+	stw r8, (sp)
+	stw r9, -4(sp)
+	stw r10, -8(sp)
+	# Загрузка базового адреса JTAG UART в r8.
+	movia r8, JTAG_UART_BASE
+	# Чтение регистра управления.
+	ldwio r9, 4(r8)
+	# Выделение поля WSPACE (доступное место в буфере записи).
+	srli r9, r9, 16
+	# Запись символа в поле DATA регистра данных.
+	stbio r4, (r8)
+	# Восстановление регистров.
+	ldw r8, (sp)
+	ldw r9, -4(sp)
+	ldw r10, -8(sp)
+	ret
+	
+/* Отправляет число из r4 в JTAG UART. */
+LOG_NUM:
+	# Сохранение регистров.
+	stw ra, (sp)
+	stw r4, -4(sp)
+	stw r8, -8(sp)
+	stw r9, -12(sp)
+	stw r10, -16(sp)
+	stw r11, -20(sp)
+	subi sp, sp, 24
+	# Адрес текущего символа в r8.
+	mov r8, r4
+	# Число 10 в r9.
+	movi r9, 10
+	# Изначальный адрес стека в r11.
+	mov r11, sp
+	# Проверка является ли число положительным.
+	bge r8, zero, LOG_NUM_POSITIVE
+	# Если число отрицательное, печатаем минус.
+	movi r4, 0x2D
+	call LOG_CHAR
+	# И делаем число положительным.
+	muli r8, r8, -1
+LOG_NUM_POSITIVE:
+	# Получаем остаток от деления на 10 в r4.
+	div r10, r8, r9
+	mul r4, r10, r9
+	sub r4, r8, r4
+	# Добавляем цифру в стек.
+	stw r4, (sp)
+	subi sp, sp, 4
+	# Цикл пока результат деления != 0.
+	mov r8, r10
+	bne r8, zero, LOG_NUM_POSITIVE
+LOG_NUM_DIGITS:
+	# Печать цифр.
+	addi sp, sp, 4
+	ldw r4, (sp)
+	addi r4, r4, 0x30
+	call LOG_CHAR
+	bne sp, r11, LOG_NUM_DIGITS
+	# Восстановление регистров.
+	addi sp, sp, 24
+	ldw ra, (sp)
+	ldw r4, -4(sp)
+	ldw r8, -8(sp)
+	ldw r9, -12(sp)
+	ldw r10, -16(sp)
+	ldw r11, -20(sp)
+	ret
+
+/* Отправляет строку по адресу r4 в JTAG UART. */
+LOG_STR:
+	# Сохранение регистров.
+	stw ra, (sp)
+	stw r4, -4(sp)
+	stw r8, -8(sp)
+	subi sp, sp, 12
+	# Адрес текущего символа в r8.
+	mov r8, r4
+LOG_STR_LOOP:
+	# Печать символов.
+	ldb r4, (r8)
+	# Если по адресу текущего символа пусто, то выходим.
+	beq r4, zero, LOG_STR_END
+	call LOG_CHAR
+	addi r8, r8, 1
+	br LOG_STR_LOOP
+LOG_STR_END:
+	# Восстановление регистров.
+	addi sp, sp, 12
+	ldw ra, (sp)
+	ldw r4, -4(sp)
+	ldw r8, -8(sp)
+	ret
+	
+/* Отправляет символ перехода на новую строку в JTAG UART. */
+LOG_LINE:
+	# Сохранение регистров.
+	stw ra, (sp)
+	stw r4, -4(sp)
+	subi sp, sp, 8
+	# Печать пробела.
+	movi r4, 0xA
+	call LOG_CHAR
+	# Восстановление регистров.
+	addi sp, sp, 8
+	ldw ra, (sp)
+	ldw r4, -4(sp)
+	ret
+
+.data
+ABS_X:
+	.word 0
+ABS_Y:
+	.word 0
+TOTAL_PACKETS:
+	.word 0
+PROG_ENDED:
+	.byte 0
+ABS_X_STR:
+	.asciz "x: "
+ABS_Y_STR:
+	.asciz "y: "
+TOTAL_PACKETS_STR:
+	.asciz "packets: "
+SAMPLING_RATE_STR:
+	.asciz "sampling rate: "
+
+.end
+
+```
 
