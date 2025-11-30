@@ -239,9 +239,8 @@
 .equ JTAG_UART_BASE, 0x10001000
 ```
 
-### Листинги программ
-
-#### PS2_from_FIFO_to_HEX
+### Листинг 1
+**Исходный файл программы PS2_from_FIFO_to_HEX.s**
 
 ```assembly
 .equ PS2_DATA, 0xFF200100
@@ -494,7 +493,8 @@ HEX_DIGITS:
 .end
 ```
 
-#### PS2_From_FIFO_to_OP_and_LCD
+### Листинг 2
+**Исходный файл программы PS2_From_FIFO_to_OP_and_LCD.s**
 
 ```assembly
 .equ PS2_DATA, 0xFF200100
@@ -789,7 +789,8 @@ RETURNRENDER:
 .end
 ```
 
-#### PS2_Typematic_rate_Delay_to_JTAG
+### Листинг 3
+**Исходный файл программы PS2_Typematic_rate_Delay_to_JTAG.s**
 
 ```assembly
 .equ PS2_DATA, 0xFF200100

@@ -158,7 +158,8 @@
 .equ JTAG_UART_BASE, 0x10001000
 ```
 
-### Листинг программы PS2_X_Y_Packets_Rate_to_JTAG_and_LedR
+### Листинг 1
+**Исходный файл программы PS2_X_Y_Packets_Rate_to_JTAG_and_LedR.s**
 
 ```assembly
 .equ LED_R, 0xFF200000
