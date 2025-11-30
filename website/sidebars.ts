@@ -34,12 +34,10 @@ const sidebars: SidebarsConfig = {
       items: [
         {
           type: 'category',
-          label: '[extra] Дополнительные лабы (неканон)',
+          label: 'Теория',
           items: [
-            'computer-organization/additional-labs/lab1-emulator-debug',
-            'computer-organization/additional-labs/lab2-protected-mode',
-            'computer-organization/additional-labs/lab3-interrupts-exceptions',
-            'computer-organization/additional-labs/lab4-paging',
+            'computer-organization/theory/jtag-theory',
+            'computer-organization/theory/jtag-uart-port',
           ],
         },
         {
@@ -66,10 +64,12 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
-          label: 'Теория',
+          label: '[extra] Дополнительные лабы (неканон)',
           items: [
-            'computer-organization/theory/jtag-theory',
-            'computer-organization/theory/jtag-uart-port',
+            'computer-organization/additional-labs/lab1-emulator-debug',
+            'computer-organization/additional-labs/lab2-protected-mode',
+            'computer-organization/additional-labs/lab3-interrupts-exceptions',
+            'computer-organization/additional-labs/lab4-paging',
           ],
         },
       ],
