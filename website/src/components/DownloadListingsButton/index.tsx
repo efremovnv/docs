@@ -165,7 +165,7 @@ export default function DownloadListingsButton({
             const listingNumber = parseInt(match[1], 10);
 
             // Ищем следующий code block после заголовка
-            let currentElement = heading.nextElementSibling;
+            let currentElement = heading.nextElementSibling as HTMLElement | null;
             let codeBlock: HTMLElement | null = null;
 
             while (currentElement) {
@@ -174,10 +174,11 @@ export default function DownloadListingsButton({
                     (currentElement.tagName === "DIV" &&
                         currentElement.querySelector("pre"))
                 ) {
-                    codeBlock = currentElement.querySelector("pre") || currentElement;
+                    const preElement = currentElement.querySelector("pre") as HTMLElement | null;
+                    codeBlock = preElement || currentElement;
                     break;
                 }
-                currentElement = currentElement.nextElementSibling;
+                currentElement = currentElement.nextElementSibling as HTMLElement | null;
             }
 
             if (!codeBlock) {
@@ -276,6 +277,96 @@ export default function DownloadListingsButton({
         return listings.sort((a, b) => a.number - b.number);
     };
 
+    // Функция для получения даты последнего обновления страницы
+    const getLastUpdatedDate = (): string => {
+        const lastUpdatedElement = document.querySelector(
+            ".theme-last-updated, [class*='last-updated'], [class*='lastUpdated'], time[datetime]"
+        ) as HTMLElement | null;
+
+        if (lastUpdatedElement) {
+            const datetime = lastUpdatedElement.getAttribute("datetime");
+            if (datetime) {
+                try {
+                    const date = new Date(datetime);
+                    // Форматируем дату в русском формате: "15 янв. 2024 г."
+                    const months = [
+                        "янв.",
+                        "февр.",
+                        "мар.",
+                        "апр.",
+                        "мая",
+                        "июня",
+                        "июля",
+                        "авг.",
+                        "сент.",
+                        "окт.",
+                        "нояб.",
+                        "дек.",
+                    ];
+                    const day = date.getDate();
+                    const month = months[date.getMonth()];
+                    const year = date.getFullYear();
+                    return `${day} ${month} ${year} г.`;
+                } catch (e) {
+                    // Если не получилось распарсить, используем текущую дату
+                }
+            }
+        }
+        
+        // Если дата не найдена, используем текущую дату
+        const now = new Date();
+        const months = [
+            "янв.",
+            "февр.",
+            "мар.",
+            "апр.",
+            "мая",
+            "июня",
+            "июля",
+            "авг.",
+            "сент.",
+            "окт.",
+            "нояб.",
+            "дек.",
+        ];
+        const day = now.getDate();
+        const month = months[now.getMonth()];
+        const year = now.getFullYear();
+        return `${day} ${month} ${year} г.`;
+    };
+
+    // Функция для добавления комментария с датой в зависимости от языка
+    const addDateHeader = (content: string, language: string, date: string): string => {
+        const dateComment = `Последнее обновление: ${date}`;
+        
+        switch (language.toLowerCase()) {
+            case 'asm':
+            case 'assembly':
+                return `; ${dateComment}\n; Автоматически сгенерировано из документации\n;\n${content}`;
+            case 'c':
+            case 'cpp':
+            case 'cxx':
+            case 'h':
+            case 'hpp':
+                return `// ${dateComment}\n// Автоматически сгенерировано из документации\n//\n${content}`;
+            case 'vhdl':
+                return `-- ${dateComment}\n-- Автоматически сгенерировано из документации\n--\n${content}`;
+            case 'verilog':
+                return `// ${dateComment}\n// Автоматически сгенерировано из документации\n//\n${content}`;
+            case 'python':
+                return `# ${dateComment}\n# Автоматически сгенерировано из документации\n#\n${content}`;
+            case 'bash':
+            case 'sh':
+                return `# ${dateComment}\n# Автоматически сгенерировано из документации\n#\n${content}`;
+            case 'makefile':
+                return `# ${dateComment}\n# Автоматически сгенерировано из документации\n#\n${content}`;
+            case 'ld':
+                return `/* ${dateComment} */\n/* Автоматически сгенерировано из документации */\n\n${content}`;
+            default:
+                return `# ${dateComment}\n# Автоматически сгенерировано из документации\n#\n${content}`;
+        }
+    };
+
     // Обработчик скачивания
     const handleDownload = async () => {
         setIsProcessing(true);
@@ -288,12 +379,22 @@ export default function DownloadListingsButton({
                 return;
             }
 
+            // Получаем дату последнего обновления
+            const lastUpdatedDate = getLastUpdatedDate();
+
             // Создаем ZIP архив
             const zip = new JSZip();
 
-            // Добавляем каждый листинг в архив
+            // Добавляем каждый листинг в архив с датой
             listings.forEach((listing) => {
-                zip.file(listing.fileName, listing.content);
+                // Добавляем комментарий с датой в начало файла
+                const contentWithDate = addDateHeader(
+                    listing.content,
+                    listing.language,
+                    lastUpdatedDate
+                );
+                
+                zip.file(listing.fileName, contentWithDate);
             });
 
             // Генерируем ZIP файл
