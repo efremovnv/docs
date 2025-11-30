@@ -40,6 +40,7 @@ const CUSTOM_DOC_TITLES: Record<string, string> = {
     "peripheral-devices/lab-mouse-ps2": "ЛР: Мышь PS/2",
     "peripheral-devices/lab-audio": "ЛР: Аудио",
     "peripheral-devices/lab-vga": "ЛР: VGA",
+    "peripheral-devices/lab-com-port": "ЛР: COM порт",
 };
 
 // Helper to recursively extract all doc IDs from a category (including nested categories)

@@ -25,6 +25,7 @@ const sidebars: SidebarsConfig = {
         'peripheral-devices/lab-mouse-ps2',
         'peripheral-devices/lab-audio',
         'peripheral-devices/lab-vga',
+        'peripheral-devices/lab-com-port',
       ],
     },
     {
