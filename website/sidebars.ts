@@ -78,6 +78,7 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Курсовая работа',
       items: [
+        'course-work/variants',
         'course-work/rp-op-design',
         'course-work/arithmetic-device',
       ],
