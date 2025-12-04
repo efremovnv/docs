@@ -79,6 +79,13 @@ const sidebars: SidebarsConfig = {
       label: 'Курсовая работа',
       items: [
         'course-work/variants',
+        {
+          type: 'category',
+          label: 'Теория',
+          items: [
+            'course-work/theory/addressing-methods',
+          ],
+        },
         'course-work/rp-op-design',
         'course-work/arithmetic-device',
       ],
