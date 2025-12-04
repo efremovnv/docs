@@ -6,7 +6,7 @@ description: Подборка ресурсов, репозиториев и ин
 export const repositories = [
 {
 title: 'docs',
-description: 'Здесь лежат все методички и хостится наш сайт.',
+description: 'Здесь на гитхабе лежат все методички и хостится наш сайт.',
 url: 'https://github.com/efremovnv/docs',
 icon: '★'
 },
@@ -17,10 +17,10 @@ url: 'https://github.com/mf-bmstu-k3',
 icon: '★'
 },
 {
-title: 'Yonote docs',
-description: 'Методичка на yonote для курсовой и ЛР.',
-url: 'https://mafin.yonote.ru/share/evm/doc/metodicheskie-ukazaniya-po-vypolneniyu-kursovoj-raboty-bMFaeB2LTj',
-icon: '🧁'
+title: 'Теория автоматов страница на bmstu (И ВАРИАНТЫ)',
+description: 'На mf.bmstu.ru лежат материалы, варианты и изначальная ссылка - там. По ОЭВМ тоже.',
+url: 'https://mf.bmstu.ru/info/faculty/kf/caf/k3/subjects/automata_theory/',
+icon: '🪄'
 },
 {
 title: 'ОЭВМ лабы 1-6',
@@ -28,6 +28,13 @@ description: 'Временная методичка для 6 семестра. �
 url: 'https://docs.google.com/document/d/1453wzaNaCJpbv4MH3XgjrgOG0HsHBQcr0_Du_8RMWFc/edit?usp=sharing',
 icon: '🧑‍🌾'
 },
+{
+title: 'Yonote docs',
+description: 'Методичка на yonote для курсовой и ЛР.',
+url: 'https://mafin.yonote.ru/share/evm/doc/metodicheskie-ukazaniya-po-vypolneniyu-kursovoj-raboty-bMFaeB2LTj',
+icon: '🧁'
+},
+
 /*
 // Пример добавления новой ссылки (просто раскомментируйте и заполните):
 {
