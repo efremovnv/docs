@@ -78,6 +78,7 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Курсовая работа',
       items: [
+        'course-work/chto-skachivat',
         'course-work/variants',
         {
           type: 'category',
