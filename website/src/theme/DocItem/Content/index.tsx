@@ -6,6 +6,7 @@ import {useLocation} from '@docusaurus/router';
 import DownloadListingsButton from '@site/src/components/DownloadListingsButton';
 import DownloadPdfButton from '@site/src/components/DownloadPdfButton';
 import AutoDownloadZipButtons from '@site/src/components/AutoDownloadZipButtons';
+import DownloadYandexDiskButton from '@site/src/components/DownloadYandexDiskButton';
 import Comments from '@site/src/components/Comments';
 import styles from './styles.module.css';
 
@@ -63,6 +64,11 @@ export default function ContentWrapper(props: Props): React.JSX.Element {
     console.log('[Comments] Pathname:', location.pathname, 'Show comments:', showComments);
   }
 
+  // Проверяем, находимся ли мы на странице VGA лабы
+  const normalizedPath = location.pathname.replace(/\/$/, '');
+  const isVgaLab = normalizedPath.includes('peripheral-devices/lab-vga') || 
+                    normalizedPath.endsWith('lab-vga');
+
   return (
     <>
       <div className={styles.downloadButtonsContainer} data-download-buttons-container>
@@ -75,6 +81,14 @@ export default function ContentWrapper(props: Props): React.JSX.Element {
         <div className={styles.downloadButtonWrapper}>
           <DownloadPdfButton />
         </div>
+        {isVgaLab && (
+          <div className={styles.downloadButtonWrapper}>
+            <DownloadYandexDiskButton 
+              url="https://disk.yandex.ru/d/YoAhWZWAESR8ww"
+              buttonText="📦  Скачать архив с материалами v2 тоже валидный архив"
+            />
+          </div>
+        )}
       </div>
       <Content {...props} />
       {/* Временно отключено: требуется установка Giscus app на репозиторий */}
