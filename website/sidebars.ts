@@ -51,6 +51,11 @@ const sidebars: SidebarsConfig = {
             'computer-organization/labs-sem6/lab4',
             'computer-organization/labs-sem6/lab5',
             'computer-organization/labs-sem6/lab6',
+            'computer-organization/labs-sem6/lr1_new',
+            'computer-organization/labs-sem6/lr2_new',
+            'computer-organization/labs-sem6/lr3_new',
+            'computer-organization/labs-sem6/lr4_new',
+            'computer-organization/labs-sem6/lr5_new',
           ],
         },
         {
