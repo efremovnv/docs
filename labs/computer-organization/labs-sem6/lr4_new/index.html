@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="ru-RU" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-computer-organization/labs-sem6/lr4_new" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.7.0">
+<title data-rh="true">Лабораторная работа 4. Выделенный доступ к памяти в RISC процессорах. Тестирование компонентов ОП в процессорной системе | efremovnv</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://efremovnv.github.io/docs/img/docusaurus.png"><meta data-rh="true" name="twitter:image" content="https://efremovnv.github.io/docs/img/docusaurus.png"><meta data-rh="true" property="og:url" content="https://efremovnv.github.io/docs/labs/computer-organization/labs-sem6/lr4_new"><meta data-rh="true" property="og:locale" content="ru_RU"><meta data-rh="true" name="docusaurus_locale" content="ru"><meta data-rh="true" name="docsearch:language" content="ru"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Лабораторная работа 4. Выделенный доступ к памяти в RISC процессорах. Тестирование компонентов ОП в процессорной системе | efremovnv"><meta data-rh="true" name="description" content="Цель работы:"><meta data-rh="true" property="og:description" content="Цель работы:"><link data-rh="true" rel="icon" href="/docs/img/logo2.svg"><link data-rh="true" rel="canonical" href="https://efremovnv.github.io/docs/labs/computer-organization/labs-sem6/lr4_new"><link data-rh="true" rel="alternate" href="https://efremovnv.github.io/docs/labs/computer-organization/labs-sem6/lr4_new" hreflang="ru-RU"><link data-rh="true" rel="alternate" href="https://efremovnv.github.io/docs/labs/computer-organization/labs-sem6/lr4_new" hreflang="x-default"><link rel="stylesheet" href="/docs/assets/css/styles.f5e402b2.css">
+<script src="/docs/assets/js/runtime~main.1e1e365e.js" defer="defer"></script>
+<script src="/docs/assets/js/main.0687256e.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/docs/img/logo.svg"><link rel="preload" as="image" href="/docs/img/logo-dark.svg"><noscript><div><img src="https://mc.yandex.ru/watch/105616798" style="position:absolute;left:-9999px" alt=""></div></noscript><div role="region" aria-label="Перейти к основному содержимому"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Перейти к основному содержимому</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Переключить навигационную панель" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/docs/"><div class="navbar__logo"><img src="/docs/img/logo.svg" alt="Логотип" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/docs/img/logo-dark.svg" alt="Логотип" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">efremovnv</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/labs/intro">Методички</a><a class="navbar__item navbar__link" href="/docs/labs/contributing/">Контрибьюция</a><a class="navbar__item navbar__link" href="/docs/labs/links">Ссылки</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/efremovnv/docs" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link header-github-link" aria-label="GitHub repository"></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Переключение между темным и светлым режимом (сейчас используется Светлый режим)" aria-label="Переключение между темным и светлым режимом (сейчас используется Светлый режим)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Прокрутка к началу" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/labs/intro">Учебные материалы по организации ЭВМ и систем</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/labs/peripheral-devices/lab-keyboard-ps2">Периферийные устройства</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/docs/labs/computer-organization/theory/jtag-theory">Организация ЭВМ</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/labs/computer-organization/theory/jtag-theory">Теория</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/docs/labs/computer-organization/labs-sem6/lab-manual-sem6">[in progress] Лабораторные работы (6 семестр)</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/labs/computer-organization/labs-sem6/lab-manual-sem6">Обзорный файл по лабораторным семестра</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/labs/computer-organization/labs-sem6/lab1">ЛР №1 Учебно-отладочный стенд</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/labs/computer-organization/labs-sem6/lab2">ЛР №2 Архитектура системы команд процессора NIOS II</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/labs/computer-organization/labs-sem6/lab3">ЛР №3 Представление символьной информации и LCD дисплей</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/labs/computer-organization/labs-sem6/lab4">ЛР №4 Выделенный доступ к памяти и тестирование ОП</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/labs/computer-organization/labs-sem6/lab5">ЛР №5 Взаимодействие программных компонентов, стек и подпрограммы</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/labs/computer-organization/labs-sem6/lab6">ЛР №6 Прерывания</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/labs/computer-organization/labs-sem6/lr1_new">Лабораторная работа 1. Учебно-отладочный стенд Intel DE2-115</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/labs/computer-organization/labs-sem6/lr2_new">Лабораторная работа 2. Архитектура системы команд процессора NIOS II</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/labs/computer-organization/labs-sem6/lr3_new">Лабораторная работа 3. Представление символьной информации в процессорной системе и вывод её на LCD дисплей</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/labs/computer-organization/labs-sem6/lr4_new">Лабораторная работа 4. Выделенный доступ к памяти в RISC процессорах. Тестирование компонентов ОП в процессорной системе</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/labs/computer-organization/labs-sem6/lr5_new">Лабораторная работа 5. Взаимодействие программных компонентов друг с другом. Использование стека, процедур, функций и вложенных подпрограмм</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/labs/computer-organization/labs-sem7/lab6">Лабораторные работы (7 семестр)</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/labs/computer-organization/additional-labs/lab1-emulator-debug">[extra] Дополнительные лабы (неканон)</a></div></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/labs/course-work/chto-skachivat">Курсовая работа</a></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Навигационная цепочка текущей страницы"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Главная страница" class="breadcrumbs__link" href="/docs/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">Организация ЭВМ</span><meta itemprop="position" content="1"></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">[in progress] Лабораторные работы (6 семестр)</span><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Лабораторная работа 4. Выделенный доступ к памяти в RISC процессорах. Тестирование компонентов ОП в процессорной системе</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">Содержание этой страницы</button></div><div class="downloadButtonsContainer_a4nW" data-download-buttons-container="true"><div class="downloadButtonWrapper_BnmG"></div><div class="downloadButtonWrapper_BnmG"></div><div class="downloadButtonWrapper_BnmG"><button style="position:relative;display:inline-flex;align-items:center;justify-content:center"><span style="display:inline-flex;align-items:center;gap:0.5rem">📄 Скачать PDF</span></button></div></div><div class="theme-doc-markdown markdown"><header><h1>Лабораторная работа 4. Выделенный доступ к памяти в RISC процессорах. Тестирование компонентов ОП в процессорной системе</h1></header>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="цель-работы">Цель работы:<a href="#цель-работы" class="hash-link" aria-label="Прямая ссылка на Цель работы:" title="Прямая ссылка на Цель работы:">​</a></h2>
+<p>Изучить, каким образом выполняется взаимодействие процессора с ОП и с
+устройствами ввода вывода, уяснить особенности команд load/store,
+выполнить тестирование всех компонентов ОП процессорной системы.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="объекты-изучения">Объекты изучения:<a href="#объекты-изучения" class="hash-link" aria-label="Прямая ссылка на Объекты изучения:" title="Прямая ссылка на Объекты изучения:">​</a></h2>
+<ul>
+<li>
+<p>команды для взаимодействия с ОП и портами ввода вывода load/store;</p>
+</li>
+<li>
+<p>компоненты оперативной памяти в процессорной системе,</p>
+</li>
+<li>
+<p>приложение Intel Monitor Program (IMP), а точнее, его возможности по
+инициализации памяти процессорной системы и отображению её содержимого
+на экране монитора инструментального компьютера.</p>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="планируемые-результаты-обучения">Планируемые результаты обучения:<a href="#планируемые-результаты-обучения" class="hash-link" aria-label="Прямая ссылка на Планируемые результаты обучения:" title="Прямая ссылка на Планируемые результаты обучения:">​</a></h2>
+<p>После выполнения этой работы студенты будут <strong>знать</strong>:</p>
+<ul>
+<li>
+<p>Стили big-endian и little-endian размещения информации в ОП;</p>
+</li>
+<li>
+<p>Как происходит взаимодействие процессора с ОП и с портами ввода вывода
+в процессорной системе;</p>
+</li>
+<li>
+<p>Как организована оперативная память в процессорной системе и в чем
+особенности отдельных её компонентов.</p>
+</li>
+</ul>
+<p><strong>Смогут</strong>:</p>
+<ul>
+<li>Создавать и использовать программные средства для тестирования
+компонентов ОП процессорной системы.</li>
+</ul>
+<p><strong>Приобретут навыки</strong>:</p>
+<ul>
+<li>
+<p>Экспериментирования и исследования для получения знаний об
+используемой в работе процессорной системы эмпирическим путем;</p>
+</li>
+<li>
+<p>Разработки и эксплуатации программных средств технической диагностики
+аппаратных ресурсов процессорной системы.</p>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="файлы-используемые-в-работе">Файлы, используемые в работе<a href="#файлы-используемые-в-работе" class="hash-link" aria-label="Прямая ссылка на Файлы, используемые в работе" title="Прямая ссылка на Файлы, используемые в работе">​</a></h2>
+<p>В работе используется файл lab4_part3, в котором содержится программа
+тестирования фрагмента ОП. Её текст с подробными комментариями приведен
+в <a href="#%D0%BB%D0%B8%D1%81%D1%82%D0%B8%D0%BD%D0%B39">листинге 9</a>, в приложении Б.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="подготовка-к-лабораторной-работе">Подготовка к лабораторной работе<a href="#подготовка-к-лабораторной-работе" class="hash-link" aria-label="Прямая ссылка на Подготовка к лабораторной работе" title="Прямая ссылка на Подготовка к лабораторной работе">​</a></h2>
+<ol>
+<li>
+<p>Изучите описание команд load/ store, посредством которых процессор
+взаимодействует с оперативной памятью и с портами ввода/вывода.
+Включите в отчет их краткое описание и формат команд.</p>
+</li>
+<li>
+<p>Выясните, какой способ для адресации операндов в ОП и в портах
+ввода/вывода используется в этих командах.</p>
+</li>
+<li>
+<p>Изучите назначение и возможности команды <em>Memory fill</em> из меню
+<em>Actions</em> приложения IMP. Включите в отчет её краткое описание.</p>
+</li>
+<li>
+<p>Уясните пункты задания, выполняемого в текущей лабораторной работе.</p>
+</li>
+<li>
+<p>Уясните логику работы программы lab4_part3, которая тестирует
+фрагмент ОП в процессорной системе. Она находится в одноименном
+файле, и её текст с подробными комментариями приведен в приложении.</p>
+</li>
+<li>
+<p>Выполните редактирование программы для выполнения пунктов 3.6 и 3.7
+задания и подготовьте новые исходные данные для тестирования ОП,
+соответствующие индивидуальному варианту задания. Включите текст
+измененной программы с обновленными данными в отчет.</p>
+</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="вопросы-для-самоконтроля">Вопросы для самоконтроля<a href="#вопросы-для-самоконтроля" class="hash-link" aria-label="Прямая ссылка на Вопросы для самоконтроля" title="Прямая ссылка на Вопросы для самоконтроля">​</a></h2>
+<ol>
+<li>
+<p>Какой формат используется для кодирования команд load, store?
+Подтвердите свое заключение отчетными материалами.</p>
+</li>
+<li>
+<p>Данные какого формата могут участвовать в пересылках между
+процессором и ОП?</p>
+</li>
+<li>
+<p>В чем особенность выполнения команд пересылки данных между
+процессором и портами ввода/вывода?</p>
+</li>
+<li>
+<p>Какой способ адресации применяется для указания ячеек ОП и портов
+ввода/вывода в процессорной системе?</p>
+</li>
+<li>
+<p>В чем заключается понятие «выровненные данные»?</p>
+</li>
+<li>
+<p>В чем особенность выполнения команд загрузки, если формат
+загружаемых данных не совпадает с разрядностью регистров процессора?</p>
+</li>
+<li>
+<p>Какие бывают стили размещения данных в оперативной памяти
+вычислительной машины? Какой из них используется в исследуемой
+процессорной системе?</p>
+</li>
+<li>
+<p>Какие компоненты оперативной памяти используются в процессорной
+системе?</p>
+</li>
+<li>
+<p>Что является запоминающим элементом в каждом из них?</p>
+</li>
+<li>
+<p>Какова разрядность адреса ячейки ОП или регистров портов ввода
+вывода?</p>
+</li>
+<li>
+<p>Адресное пространство оперативной памяти и ввода вывода в
+процессорной системе является разделенным или совмещенным?</p>
+</li>
+<li>
+<p>Какого типа кэш память используется в процессорной системе?</p>
+</li>
+<li>
+<p>В чем заключается конфигурирование кэш памяти и как её выполнить?</p>
+</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="порядок-выполнения-лабораторной-работы">Порядок выполнения лабораторной работы<a href="#порядок-выполнения-лабораторной-работы" class="hash-link" aria-label="Прямая ссылка на Порядок выполнения лабораторной работы" title="Прямая ссылка на Порядок выполнения лабораторной работы">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="часть-1-выполнение-команд-сохранения-store-в-процессорной-системе">Часть 1. Выполнение команд сохранения (store) в процессорной системе<a href="#часть-1-выполнение-команд-сохранения-store-в-процессорной-системе" class="hash-link" aria-label="Прямая ссылка на Часть 1. Выполнение команд сохранения (store) в процессорной системе" title="Прямая ссылка на Часть 1. Выполнение команд сохранения (store) в процессорной системе">​</a></h3>
+<p><strong>1.1.</strong> Напишите фрагмент программы, которая будет сохранять слово в ОП по
+начальному адресу статической памяти, используемой в процессорной
+системе. Затем выполняется сохранение этого же слова по смещенному
+на единицу адресу. Затем по адресу, смещенному на 2, на 3, на 4 и на
+5, соответственно. Рекомендуется в регистр, содержимое которого
+сохраняется в ОП, предварительно записать значение 0x12345678. Перед
+запуском программы рекомендуется очистить записываемую область
+памяти с помощью команды <em>Memory fill</em> из контекстно-зависимого
+меню. Исследуйте возможности этой команды и включите их описание в
+отчет. Причем, каждый раз перед выполнением следующей команды записи
+в ОП очищайте информацию, записанную предыдущей командой. Наблюдайте
+выполнение программы по шагам, используя вкладку <em>Memory</em> приложения
+IMP. Сравнивайте наблюдаемый результат с предполагаемым результатом.
+Зафиксируйте в отчете ваши наблюдения в виде снимков экрана ПК и
+ваши объяснения.</p>
+<p><strong>1.2.</strong> Модифицируйте программу из предыдущего пункта таким образом, чтобы
+обращение к памяти производилось полусловами. Наблюдайте выполнение
+программы по шагам и фиксируйте ваши наблюдения и объяснения в
+отчете.</p>
+<p><strong>1.3.</strong> Модифицируйте программу из предыдущего пункта таким образом, чтобы
+обращение к памяти производилось байтами. Наблюдайте выполнение
+программы по шагам и фиксируйте ваши наблюдения и объяснения в
+отчете.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="часть-2-выполнение-команд-загрузки-load-в-процессорной-системе">Часть 2. Выполнение команд загрузки (load) в процессорной системе<a href="#часть-2-выполнение-команд-загрузки-load-в-процессорной-системе" class="hash-link" aria-label="Прямая ссылка на Часть 2. Выполнение команд загрузки (load) в процессорной системе" title="Прямая ссылка на Часть 2. Выполнение команд загрузки (load) в процессорной системе">​</a></h3>
+<p><strong>2.1.</strong> Модифицируйте программу из части 1 таким образом, чтобы в программе
+теперь выполнялось чтение из последовательных адресов ОП слов,
+полуслов, байтов аналогично тому, как это делалось в пунктах 1-3
+первой части. Перед выполнением команд чтения из ОП, для
+наглядности, рекомендуется предварительно выполнить запись в
+последовательные ячейки памяти следующих двух слов 0х23456789,
+0хabcdef01. Считываемую из ОП информацию загружайте в регистры
+процессора с последовательными номерами. Рассмотрите варианты
+использования команд загрузки операндов как со знаком, так и без
+знака. Поместите в отчет наблюдаемые результаты, в виде снимков
+экрана ПК с содержимым регистров и сделанные вами выводы.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="часть-3-тестирование-всех-типов-оперативной-памяти-используемой-в-процессорной-системе">Часть 3. Тестирование всех типов оперативной памяти, используемой в процессорной системе<a href="#часть-3-тестирование-всех-типов-оперативной-памяти-используемой-в-процессорной-системе" class="hash-link" aria-label="Прямая ссылка на Часть 3. Тестирование всех типов оперативной памяти, используемой в процессорной системе" title="Прямая ссылка на Часть 3. Тестирование всех типов оперативной памяти, используемой в процессорной системе">​</a></h3>
+<p>Для выполнения этой части задания предлагается использовать программу
+lab4_part3, листинг которой содержится в <a href="#%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B1-1">приложении
+Б</a>.</p>
+<p>Вначале программа гасит все светодиоды. Затем она осуществляет запись в
+последовательные ячейки памяти, начиная с адреса А_start по адрес A_end,
+включительно, некоторых значений, используя команды сохранения слов.
+Программа, после выполнения записи в ячейку памяти, выполняет ее
+считывание и сравнение с записываемой величиной.</p>
+<p>При обнаружении несовпадения программа зажигает красные светодиоды и
+завершает свое выполнение. Записываемые в оперативную память последующие
+значения получаются путем прибавления некоторого приращения <em>step</em> к
+предыдущему значению.</p>
+<p>Если в процессе выполнения программа не обнаруживает несовпадения
+записываемых и считываемых из памяти значений для всего диапазона ОП, то
+программа зажигает зеленые светодиоды и завершает свое выполнение.</p>
+<p>Внесите следующие изменения в программу. В качестве начального значения,
+записываемого в ОП, используйте порядковый номер студента в списке
+группы. Приращение определите путем пересчета порядкового номера
+студента в списке группы по модулю семь.</p>
+<p><strong>3.1.</strong> Выполните программу, используя в качестве ОП статическую память. С
+помощью вкладки <em>Memory</em> приложения IМР убедитесь, что заполнение ОП
+произошло в соответствии с заданным вариантом, причем во всем
+заданном диапазоне. Выполните снимки экрана монитора ПК, отражающие
+содержимое ОП в начале и в конце диапазона и поместите их в отчет.</p>
+<p><strong>3.2.</strong> Установите конечный адрес диапазона ОП, выходящий за пределы
+статической памяти. Отразите в отчете наблюдаемый результат.</p>
+<p><strong>3.3.</strong> Установите начальный адрес диапазона ОП, выходящий за нижнюю границу
+статической памяти. Отразите в отчете наблюдаемый результат.</p>
+<p><strong>3.4.</strong> Внесите изменения в программу таким образом, чтобы заполнение ОП
+выполнялось полусловами. Добейтесь правильного завершения программы,
+сопровождаемое загоранием зеленых светодиодов. Включите в отчет
+снимки экрана ПК, подтверждающие правильное заполнение ОП и листинг
+отлаженной программы.</p>
+<p><strong>3.5.</strong> Внесите изменения в программу таким образом, чтобы заполнение ОП
+выполнялось байтами. Добейтесь правильного завершения программы,
+сопровождаемое загоранием зеленых светодиодов. Включите в отчет
+снимки экрана ПК, подтверждающие правильное заполнение ОП и листинг
+отлаженной программы.</p>
+<p><strong>3.6.</strong> Проверьте правильность работы программы, используя в качестве ОП
+динамическую память. Учтите, что в динамической памяти размещена
+сама программа. Поэтому, в качестве начального адреса тестируемого
+фрагмента ОП используйте адрес ячейки, следующей сразу за
+программой. Обратите внимание на существенное увеличение времени
+выполнения программы. Включите в отчет свои соображения по этому
+поводу.</p>
+<p><strong>3.7.</strong> Проверьте правильность работы программы, используя в качестве ОП
+память, реализованную внутри кристалла. Следует заметить, что эта
+память имеет некоторую особенность, которая должна быть выявлена
+студентами в процессе её тестирования. Добейтесь правильного
+завершения программы. Отразите в отчете выявленную особенность.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="отчетные-материалы">Отчетные материалы<a href="#отчетные-материалы" class="hash-link" aria-label="Прямая ссылка на Отчетные материалы" title="Прямая ссылка на Отчетные материалы">​</a></h2>
+<p>Отчетные материалы должны содержать.</p>
+<ol>
+<li>
+<p>Цель лабораторной работы.</p>
+</li>
+<li>
+<p>Материалы, связанные с подготовкой к работе, включая теоретическую
+часть и исходный код программной заготовки с именем lab4_part3.</p>
+</li>
+<li>
+<p>Информацию по выполнению каждого пункта задания. Причем в отчете
+должны содержаться выполняемые вами действия, наблюдаемые
+результаты, и ваши объяснения. Наблюдаемые результаты должны быть
+подтверждены снимками экрана инструментального компьютера или
+снимками стенда.</p>
+</li>
+<li>
+<p>Подготовленные и отлаженные вами фрагменты программ, выполняющие
+пункты настоящего описания.</p>
+</li>
+<li>
+<p>Краткое заключение.</p>
+</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="защита-лабораторной-работы">Защита лабораторной работы<a href="#защита-лабораторной-работы" class="hash-link" aria-label="Прямая ссылка на Защита лабораторной работы" title="Прямая ссылка на Защита лабораторной работы">​</a></h2>
+<p>На защите работы студенты должны демонстрировать знания, умения и
+навыки, перечисленные в разделе «Планируемые результаты обучения».</p>
+<p>Уметь организовывать взаимодействие процессора с ОП и c портами
+ввода/вывода с помощью команд load/store;</p>
+<p>Понимать особенности этих команд;</p>
+<p>Знать какие ресурсы стенда используются для реализации ОП в процессорной
+системе и понимать в чем их особенности.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="примерные-вопросы">Примерные вопросы<a href="#примерные-вопросы" class="hash-link" aria-label="Прямая ссылка на Примерные вопросы" title="Прямая ссылка на Примерные вопросы">​</a></h3>
+<ul>
+<li>
+<p>Какой формат используется для кодирования команд load/store? Выполните
+декодирование нескольких команд из используемых в работе фрагментов
+программ и прокомментируйте содержимое отдельных полей команды.
+Рекомендуется для этого использовать текстовый редактор.</p>
+</li>
+<li>
+<p>Какие способы адресации используются в командах load/store для
+адресации операндов? Прокомментируйте свой ответ, выполнив
+декодирование некоторых команд из используемых в работе фрагментов
+программ.</p>
+</li>
+<li>
+<p>Какая особенность памяти on-chip memory была выявлена при выполнении
+третьей части лабораторной работы? Продемонстрируйте эту особенность
+экспериментально.</p>
+</li>
+<li>
+<p>Как экспериментально определить размер типов ОП, используемой в
+процессорной системе?</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="примерные-задания">Примерные задания<a href="#примерные-задания" class="hash-link" aria-label="Прямая ссылка на Примерные задания" title="Прямая ссылка на Примерные задания">​</a></h3>
+<ul>
+<li>
+<p>Используя вкладку <em>Memory</em> отобразите содержимое ОП с указанного
+адреса с использованием слов. Объясните по каким адресам в ОП хранятся
+отдельные байты информации. Объясните по каким адресам в ОП хранятся
+отдельные полуслова информации. Подтвердите экспериментально.</p>
+</li>
+<li>
+<p>Если выполнять последовательное чтение из ОП с заданного адреса слов,
+полуслов и байтов с загрузкой их в смежные регистры процессора, то
+каким станет содержимое РП после этого? Подтвердите свой ответ
+экспериментально.</p>
+</li>
+<li>
+<p>В чем отличие команд загрузки со знаком от команд загрузки.
+Подтвердите своё мнение экспериментально.</p>
+</li>
+<li>
+<p>Как заполнить некоторый фрагмент ОП некоторым константным значением с
+помощью приложения IMP? Например, если трактовать фрагмент ОП как
+символьный буфер, то как его очистить, то есть заполнить пробелами?
+Продемонстрируйте это с использованием стенда.</p>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="приложения">Приложения<a href="#приложения" class="hash-link" aria-label="Прямая ссылка на Приложения" title="Прямая ссылка на Приложения">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="приложение-а">Приложение А<a href="#приложение-а" class="hash-link" aria-label="Прямая ссылка на Приложение А" title="Прямая ссылка на Приложение А">​</a></h3>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="команды-load-store">Команды «load», «store»<a href="#команды-load-store" class="hash-link" aria-label="Прямая ссылка на Команды «load», «store»" title="Прямая ссылка на Команды «load», «store»">​</a></h2>
+<p>Команды загрузки/сохранения предназначены для пересылки данных между
+регистрами общего назначения процессора и оперативной памятью
+(устройствами ввода/вывода). Они относятся к формату I-типа. Ниже
+перечислены сами команды и приведено их краткое описание.</p>
+<ul>
+<li>
+<p><strong>ldw(load word) rB, byte_offset (rA)</strong> – загрузка в регистр <strong>rB</strong>
+слова из ОП. Адрес операнда в ОП определяется путем сложения
+содержимого регистра <strong>rА</strong> и смещения <strong>byte_offset</strong>: <strong>(rA) +
+byte_offset</strong>.</p>
+</li>
+<li>
+<p><strong>stw(store word) rB, byte_offset (rA)</strong> – сохранение слова из <strong>rB</strong>
+в ОП по адресу <strong>(rA) + byte_offset</strong>.</p>
+</li>
+<li>
+<p><strong>ldb (load byte)</strong> – загрузка в регистр процессора байта со знаком из
+ОП.</p>
+</li>
+<li>
+<p><strong>ldbu (load byte unsigned)</strong> – загрузка в регистр процессора байта
+без знака из ОП.</p>
+</li>
+<li>
+<p><strong>ldh (load halfword)</strong> – загрузка в регистр процессора полуслова со
+знаком из ОП.</p>
+</li>
+<li>
+<p><strong>ldhu (load halfword unsigned)</strong> – загрузка в регистр процессора
+полуслова без знака из ОП.</p>
+</li>
+</ul>
+<p>При загрузке операнда со знаком в 32-битный регистр процессора операнд
+дополняется до 32 разрядов знаковым разрядом.</p>
+<p>При загрузке операнда без знака операнд дополняется до 32 разрядов
+нулями.</p>
+<ul>
+<li>
+<p><strong>stb (store byte)</strong> – сохранение байта из регистра процессора в ОП.</p>
+</li>
+<li>
+<p><strong>sth (store halfword)</strong> – сохранение полуслова из регистра процессора
+в ОП.</p>
+</li>
+</ul>
+<p><a id="_Toc227882674"></a>Представленные выше две
+команды выполняют сохранение младшего байта (полуслова) регистра в ОП.</p>
+<p>Ниже приведены команды загрузки/сохранения операнда в устройствах
+ввода/вывода.</p>
+<ul>
+<li>
+<p><strong>ldwio (load word I/0)</strong> – загрузка слова из устройства ввода/вывода
+в регистр процессора.</p>
+</li>
+<li>
+<p><strong>ldbio (load byte I/0)</strong> – загрузка байта со знаком из устройства
+ввода/вывода в регистр процессора.</p>
+</li>
+<li>
+<p><strong>ldbuio (load byte unsigned I/0)</strong> – загрузка байта без знака из
+устройства ввода/вывода в регистр процессора.</p>
+</li>
+<li>
+<p><strong>ldhio (load halfword I/0)</strong> – загрузка полуслова со знаком из
+устройства ввода/вывода в регистр процессора.</p>
+</li>
+<li>
+<p><strong>ldhuio (load halfword I/0)</strong> – загрузка полуслова без знака из
+устройства ввода/вывода в регистр процессора.</p>
+</li>
+<li>
+<p><strong>stwio (store word I/0)</strong> – сохранение слова из регистра процессора в
+устройстве ввода/вывода.</p>
+</li>
+<li>
+<p><strong>stbio (store byte I/0)</strong> – сохранение байта из регистра процессора в
+устройстве ввода/вывода.</p>
+</li>
+<li>
+<p><strong>sthio (store hafword I/0)</strong> – сохранение полуслова из регистра
+процессора в устройстве ввода/вывода.</p>
+</li>
+</ul>
+<p>Команды загрузки/сохранения операнда в устройствах ввода/вывода
+выполняются без обращения к кэш памяти.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="приложение-б">Приложение Б<a href="#приложение-б" class="hash-link" aria-label="Прямая ссылка на Приложение Б" title="Прямая ссылка на Приложение Б">​</a></h3>
+<a id="листинг9"></a>
+<div class="language-asm codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-asm codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">.text                   /* объявляем секцию кода */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.equ A_start, 0x8000000 /* начальный адрес фрагмента ОП */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.equ A_end, 0x81FFFFF   /* конечный адрес фрагмента ОП */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.equ step, 0x1          /* шаг для изменения числа-заполнителя */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.equ number, 0x0        /* число-заполнитель */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.equ red, 0x10000000    /* адрес красных светодиодов */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.equ green, 0x10000010  /* адрес зеленых светодиодов */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.equ on, 0x3FFFF        /* набор для зажигания светодиодов */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.global _start</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">_start:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movia r5, number    /* в r5 число для записи в ОП */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movia r6, A_start   /* в r6 начальный адрес фрагмента ОП */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movia r8, A_end     /* в r8 конечный адрес фрагмента ОП */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movia r3, red       /* адрес красных светодиодов в r3 */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movia r4, green     /* адрес зеленых светодиодов в r4 */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movia r2, on        /* набор для зажигания в r2 */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    stwio r0, (r3)      /* гасим красные светодиоды */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    stwio r0, (r4)      /* гасим зеленые светодиоды */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">p:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    stw r5, (r6)        /* число из r5 в ОП */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ldw r7, (r6)        /* число из ОП в r7 */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    bne r5, r7, ledr    /* если не совпали, то зажигаем красные светодиоды */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    addi r5, r5, step   /* увеличиваем число-заполнитель на step */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    addi r6, r6, 4      /* адресуем следующее слово в ОП */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    bgt r6, r8, ledg    /* если проверили все адреса, зажигаем зеленые светодиоды */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    br p                /* переходим на следующее обращение к ОП */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ledr:                   /* зажигаем красные светодиоды */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    stwio r2, (r3)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    br stop</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ledg:                   /* зажигаем зеленые светодиоды */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    stwio r2, (r4)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">stop:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    br stop             /* завершаем программу */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.end</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Скопировать в буфер обмена" title="Скопировать" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><strong>Листинг 9. Текст программы <code>lab4_part3.s</code></strong></p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/efremovnv/docs/edit/main/website/docs/computer-organization/labs-sem6/lr4_new.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Отредактировать эту страницу</a></div><div class="col lastUpdated_JAkA"><span class="theme-last-updated">Последнее обновление<!-- --> <b><time datetime="2026-05-27T15:28:45.000Z" itemprop="dateModified">27 мая 2026 г.</time></b></span></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Страница документа"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/labs/computer-organization/labs-sem6/lr3_new"><div class="pagination-nav__sublabel">Предыдущая страница</div><div class="pagination-nav__label">Лабораторная работа 3. Представление символьной информации в процессорной системе и вывод её на LCD дисплей</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/labs/computer-organization/labs-sem6/lr5_new"><div class="pagination-nav__sublabel">Следующая страница</div><div class="pagination-nav__label">Лабораторная работа 5. Взаимодействие программных компонентов друг с другом. Использование стека, процедур, функций и вложенных подпрограмм</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#цель-работы" class="table-of-contents__link toc-highlight">Цель работы:</a></li><li><a href="#объекты-изучения" class="table-of-contents__link toc-highlight">Объекты изучения:</a></li><li><a href="#планируемые-результаты-обучения" class="table-of-contents__link toc-highlight">Планируемые результаты обучения:</a></li><li><a href="#файлы-используемые-в-работе" class="table-of-contents__link toc-highlight">Файлы, используемые в работе</a></li><li><a href="#подготовка-к-лабораторной-работе" class="table-of-contents__link toc-highlight">Подготовка к лабораторной работе</a></li><li><a href="#вопросы-для-самоконтроля" class="table-of-contents__link toc-highlight">Вопросы для самоконтроля</a></li><li><a href="#порядок-выполнения-лабораторной-работы" class="table-of-contents__link toc-highlight">Порядок выполнения лабораторной работы</a><ul><li><a href="#часть-1-выполнение-команд-сохранения-store-в-процессорной-системе" class="table-of-contents__link toc-highlight">Часть 1. Выполнение команд сохранения (store) в процессорной системе</a></li><li><a href="#часть-2-выполнение-команд-загрузки-load-в-процессорной-системе" class="table-of-contents__link toc-highlight">Часть 2. Выполнение команд загрузки (load) в процессорной системе</a></li><li><a href="#часть-3-тестирование-всех-типов-оперативной-памяти-используемой-в-процессорной-системе" class="table-of-contents__link toc-highlight">Часть 3. Тестирование всех типов оперативной памяти, используемой в процессорной системе</a></li></ul></li><li><a href="#отчетные-материалы" class="table-of-contents__link toc-highlight">Отчетные материалы</a></li><li><a href="#защита-лабораторной-работы" class="table-of-contents__link toc-highlight">Защита лабораторной работы</a><ul><li><a href="#примерные-вопросы" class="table-of-contents__link toc-highlight">Примерные вопросы</a></li><li><a href="#примерные-задания" class="table-of-contents__link toc-highlight">Примерные задания</a></li></ul></li><li><a href="#приложения" class="table-of-contents__link toc-highlight">Приложения</a><ul><li><a href="#приложение-а" class="table-of-contents__link toc-highlight">Приложение А</a></li></ul></li><li><a href="#команды-load-store" class="table-of-contents__link toc-highlight">Команды «load», «store»</a><ul><li><a href="#приложение-б" class="table-of-contents__link toc-highlight">Приложение Б</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">efremovnv</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/">Начало</a></li></ul></div><div class="col footer__col"><div class="footer__title">Ресурсы</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/efremovnv/docs" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 efremovnv. Создано с помощью Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

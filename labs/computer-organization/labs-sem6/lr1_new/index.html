@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="ru-RU" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-computer-organization/labs-sem6/lr1_new" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.7.0">
+<title data-rh="true">Лабораторная работа 1. Учебно-отладочный стенд Intel DE2-115 | efremovnv</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://efremovnv.github.io/docs/img/docusaurus.png"><meta data-rh="true" name="twitter:image" content="https://efremovnv.github.io/docs/img/docusaurus.png"><meta data-rh="true" property="og:url" content="https://efremovnv.github.io/docs/labs/computer-organization/labs-sem6/lr1_new"><meta data-rh="true" property="og:locale" content="ru_RU"><meta data-rh="true" name="docusaurus_locale" content="ru"><meta data-rh="true" name="docsearch:language" content="ru"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Лабораторная работа 1. Учебно-отладочный стенд Intel DE2-115 | efremovnv"><meta data-rh="true" name="description" content="Intel Monitor Program, стенд DE2-115, ввод-вывод и отладка программ"><meta data-rh="true" property="og:description" content="Intel Monitor Program, стенд DE2-115, ввод-вывод и отладка программ"><link data-rh="true" rel="icon" href="/docs/img/logo2.svg"><link data-rh="true" rel="canonical" href="https://efremovnv.github.io/docs/labs/computer-organization/labs-sem6/lr1_new"><link data-rh="true" rel="alternate" href="https://efremovnv.github.io/docs/labs/computer-organization/labs-sem6/lr1_new" hreflang="ru-RU"><link data-rh="true" rel="alternate" href="https://efremovnv.github.io/docs/labs/computer-organization/labs-sem6/lr1_new" hreflang="x-default"><link rel="stylesheet" href="/docs/assets/css/styles.f5e402b2.css">
+<script src="/docs/assets/js/runtime~main.1e1e365e.js" defer="defer"></script>
+<script src="/docs/assets/js/main.0687256e.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/docs/img/logo.svg"><link rel="preload" as="image" href="/docs/img/logo-dark.svg"><link rel="preload" as="image" href="./assets/imp-icon.png"><link rel="preload" as="image" href="./assets/compile-load.png"><link rel="preload" as="image" href="./assets/continue.png"><link rel="preload" as="image" href="./assets/stop.png"><link rel="preload" as="image" href="./assets/single-step.png"><link rel="preload" as="image" href="./assets/restart.png"><noscript><div><img src="https://mc.yandex.ru/watch/105616798" style="position:absolute;left:-9999px" alt=""></div></noscript><div role="region" aria-label="Перейти к основному содержимому"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Перейти к основному содержимому</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Переключить навигационную панель" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/docs/"><div class="navbar__logo"><img src="/docs/img/logo.svg" alt="Логотип" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/docs/img/logo-dark.svg" alt="Логотип" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">efremovnv</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/labs/intro">Методички</a><a class="navbar__item navbar__link" href="/docs/labs/contributing/">Контрибьюция</a><a class="navbar__item navbar__link" href="/docs/labs/links">Ссылки</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/efremovnv/docs" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link header-github-link" aria-label="GitHub repository"></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Переключение между темным и светлым режимом (сейчас используется Светлый режим)" aria-label="Переключение между темным и светлым режимом (сейчас используется Светлый режим)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Прокрутка к началу" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/labs/intro">Учебные материалы по организации ЭВМ и систем</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/labs/peripheral-devices/lab-keyboard-ps2">Периферийные устройства</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/docs/labs/computer-organization/theory/jtag-theory">Организация ЭВМ</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/labs/computer-organization/theory/jtag-theory">Теория</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/docs/labs/computer-organization/labs-sem6/lab-manual-sem6">[in progress] Лабораторные работы (6 семестр)</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/labs/computer-organization/labs-sem6/lab-manual-sem6">Обзорный файл по лабораторным семестра</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/labs/computer-organization/labs-sem6/lab1">ЛР №1 Учебно-отладочный стенд</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/labs/computer-organization/labs-sem6/lab2">ЛР №2 Архитектура системы команд процессора NIOS II</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/labs/computer-organization/labs-sem6/lab3">ЛР №3 Представление символьной информации и LCD дисплей</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/labs/computer-organization/labs-sem6/lab4">ЛР №4 Выделенный доступ к памяти и тестирование ОП</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/labs/computer-organization/labs-sem6/lab5">ЛР №5 Взаимодействие программных компонентов, стек и подпрограммы</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/labs/computer-organization/labs-sem6/lab6">ЛР №6 Прерывания</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/labs/computer-organization/labs-sem6/lr1_new">Лабораторная работа 1. Учебно-отладочный стенд Intel DE2-115</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/labs/computer-organization/labs-sem6/lr2_new">Лабораторная работа 2. Архитектура системы команд процессора NIOS II</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/labs/computer-organization/labs-sem6/lr3_new">Лабораторная работа 3. Представление символьной информации в процессорной системе и вывод её на LCD дисплей</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/labs/computer-organization/labs-sem6/lr4_new">Лабораторная работа 4. Выделенный доступ к памяти в RISC процессорах. Тестирование компонентов ОП в процессорной системе</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/labs/computer-organization/labs-sem6/lr5_new">Лабораторная работа 5. Взаимодействие программных компонентов друг с другом. Использование стека, процедур, функций и вложенных подпрограмм</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/labs/computer-organization/labs-sem7/lab6">Лабораторные работы (7 семестр)</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/docs/labs/computer-organization/additional-labs/lab1-emulator-debug">[extra] Дополнительные лабы (неканон)</a></div></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/docs/labs/course-work/chto-skachivat">Курсовая работа</a></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Навигационная цепочка текущей страницы"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Главная страница" class="breadcrumbs__link" href="/docs/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">Организация ЭВМ</span><meta itemprop="position" content="1"></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">[in progress] Лабораторные работы (6 семестр)</span><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Лабораторная работа 1. Учебно-отладочный стенд Intel DE2-115</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">Содержание этой страницы</button></div><div class="downloadButtonsContainer_a4nW" data-download-buttons-container="true"><div class="downloadButtonWrapper_BnmG"></div><div class="downloadButtonWrapper_BnmG"></div><div class="downloadButtonWrapper_BnmG"><button style="position:relative;display:inline-flex;align-items:center;justify-content:center"><span style="display:inline-flex;align-items:center;gap:0.5rem">📄 Скачать PDF</span></button></div></div><div class="theme-doc-markdown markdown"><header><h1>Учебно-отладочный стенд «Intel DE 2-115». Приложение Intel Monitor Program (IMP) для работы со стендом</h1></header>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="содержание">Содержание<a href="#содержание" class="hash-link" aria-label="Прямая ссылка на Содержание" title="Прямая ссылка на Содержание">​</a></h2>
+<ul>
+<li><a href="#%D1%86%D0%B5%D0%BB%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B">Цель работы</a></li>
+<li><a href="#%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D1%8B-%D0%B8%D0%B7%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D1%8F">Объекты изучения</a></li>
+<li><a href="#%D0%BF%D0%BB%D0%B0%D0%BD%D0%B8%D1%80%D1%83%D0%B5%D0%BC%D1%8B%D0%B5-%D1%80%D0%B5%D0%B7%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82%D1%8B-%D0%BE%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D1%8F">Планируемые результаты обучения</a></li>
+<li><a href="#%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D1%83%D0%B5%D0%BC%D1%8B%D0%B5-%D1%84%D0%B0%D0%B9%D0%BB%D1%8B">Используемые файлы</a></li>
+<li><a href="#%D0%BF%D0%BE%D0%B4%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BA%D0%B0-%D0%BA-%D0%BB%D0%B0%D0%B1%D0%BE%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%BD%D0%BE%D0%B9-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B5">Подготовка к лабораторной работе</a></li>
+<li><a href="#%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%81%D0%B0%D0%BC%D0%BE%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D1%8F">Вопросы для самоконтроля</a></li>
+<li><a href="#%D0%BF%D0%BE%D1%80%D1%8F%D0%B4%D0%BE%D0%BA-%D0%B2%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D1%8F-%D0%BB%D0%B0%D0%B1%D0%BE%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%BD%D0%BE%D0%B9-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B">Порядок выполнения лабораторной работы</a></li>
+<li><a href="#%D0%BE%D1%82%D1%87%D0%B5%D1%82%D0%BD%D1%8B%D0%B5-%D0%BC%D0%B0%D1%82%D0%B5%D1%80%D0%B8%D0%B0%D0%BB%D1%8B">Отчетные материалы</a></li>
+<li><a href="#%D0%B7%D0%B0%D1%89%D0%B8%D1%82%D0%B0-%D0%BB%D0%B0%D0%B1%D0%BE%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%BD%D0%BE%D0%B9-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B">Защита лабораторной работы</a></li>
+<li><a href="#%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B0-%D0%B8%D0%BB%D0%BB%D1%8E%D1%81%D1%82%D1%80%D0%B0%D1%86%D0%B8%D0%B8">Приложения</a></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="цель-работы">Цель работы<a href="#цель-работы" class="hash-link" aria-label="Прямая ссылка на Цель работы" title="Прямая ссылка на Цель работы">​</a></h2>
+<p>Приобретение навыков, необходимых для выполнения лабораторных работ по
+дисциплине «Организация ЭВМ и систем» с использованием стендов Intel DE
+2-115 с помощью приложения Intel Monitor Program (IMP).</p>
+<p>Научиться использовать в своих проектах кнопочные и ползунковые
+переключатели, светодиоды и HEX индикаторы, входящие в состав стенда.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="объекты-изучения">Объекты изучения<a href="#объекты-изучения" class="hash-link" aria-label="Прямая ссылка на Объекты изучения" title="Прямая ссылка на Объекты изучения">​</a></h2>
+<ul>
+<li>
+<p>учебно-отладочный стенд Intel DE 2 -115;</p>
+</li>
+<li>
+<p>приложение Intel Monitor Program, для работы со стендом;</p>
+</li>
+<li>
+<p>процессорная система DE 2-115 Media Computer и её периферийные
+устройства:</p>
+<ul>
+<li>
+<p>ползунковые переключатели;</p>
+</li>
+<li>
+<p>кнопочные переключатели;</p>
+</li>
+<li>
+<p>красные и зеленые светодиоды;</p>
+</li>
+<li>
+<p>HEX индикаторы, входящие в состав стенда.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="планируемые-результаты-обучения">Планируемые результаты обучения<a href="#планируемые-результаты-обучения" class="hash-link" aria-label="Прямая ссылка на Планируемые результаты обучения" title="Прямая ссылка на Планируемые результаты обучения">​</a></h2>
+<p>После выполнения этой работы студенты будут <strong>знать:</strong></p>
+<ul>
+<li>
+<p>Какие компоненты включены в состав учебно-отладочного стенда DE2-115 и
+с какой целью;</p>
+</li>
+<li>
+<p>Какие из них используются в процессорной системе DE 2-115 Media
+Computer.</p>
+</li>
+<li>
+<p>Какие ресурсы содержатся в кристалле ПЛИС, входящем в состав стенда.</p>
+</li>
+</ul>
+<p><strong>смогут:</strong></p>
+<ul>
+<li>
+<p>Подключать учебно-отладочный стенд DE 2-115 к инструментальному
+компьютеру и работать с ним, используя приложение IMP;</p>
+</li>
+<li>
+<p>Создавать новые проекты в приложении IMP;</p>
+</li>
+<li>
+<p>Загружать процессорную систему в кристалл ПЛИС стенда;</p>
+</li>
+<li>
+<p>Использовать программные компоненты в процессорной системе;</p>
+</li>
+<li>
+<p>Выполнять их компиляцию и загрузку в оперативную память процессорной
+системы;</p>
+</li>
+<li>
+<p>Определять состояния кнопок и ползунковых переключателей и управлять
+индикаторами, входящими в состав стенда.</p>
+<p><strong>приобретут навыки:</strong></p>
+</li>
+<li>
+<p>по созданию новых проектов в приложении IMP;</p>
+</li>
+<li>
+<p>выбору для них подходящей процессорной системы;</p>
+</li>
+<li>
+<p>добавления программных компонентов в проект;</p>
+</li>
+<li>
+<p>использования в проектах простейших устройств индикации, ползунковых и
+кнопочных переключателей.</p>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="используемые-файлы">Используемые файлы<a href="#используемые-файлы" class="hash-link" aria-label="Прямая ссылка на Используемые файлы" title="Прямая ссылка на Используемые файлы">​</a></h2>
+<p>Файлы, используемые в работе, входят в состав приложения IMP. Для
+процессорной системы DE 2-115 Media Computer это следующие файлы:
+<strong>nios_system.sopcinfo</strong> и <strong>DE2-115_Media_Computer.sof</strong>. Первый из них
+содержит перечисление компонентов процессорной системы с указанием их
+особенностей и адресов. Второй файл является конфигурационным файлом, то
+есть используется для прошивки кристалла ПЛИС стенда.</p>
+<p>Третий файл <strong>test_Media_Computer.s</strong> содержит программу тестирования
+процессорной системы. Основная её часть с подробными комментариями
+приведена в <a href="#%D0%BB%D0%B8%D1%81%D1%82%D0%B8%D0%BD%D0%B3-1-%D1%84%D1%80%D0%B0%D0%B3%D0%BC%D0%B5%D0%BD%D1%82-%D1%84%D0%B0%D0%B9%D0%BB%D0%B0-test_mediacomputers">листинге 1</a> в приложении Б и вынесена в файл <a href="/docs/assets/files/test_Media_Computer-4c6362ec8cfb1b7fed9d047ff9207b59.s" target="_blank"><code>listings/test_Media_Computer.s</code></a>.</p>
+<p>В <a href="#%D0%BB%D0%B8%D1%81%D1%82%D0%B8%D0%BD%D0%B3-2-%D1%84%D0%B0%D0%B9%D0%BB-address_maps">листинге 2</a> представлено содержимое файла <strong>address_map.s</strong>. Полный фрагмент вынесен в файл <a href="/docs/assets/files/address_map-33ab4b1d7ef134cdf7a3e99917c39fe0.s" target="_blank"><code>listings/address_map.s</code></a>. В нём можем видеть поименованные константы с адресами
+периферийных устройств и компонентов ОП.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="подготовка-к-лабораторной-работе">Подготовка к лабораторной работе<a href="#подготовка-к-лабораторной-работе" class="hash-link" aria-label="Прямая ссылка на Подготовка к лабораторной работе" title="Прямая ссылка на Подготовка к лабораторной работе">​</a></h2>
+<p>Ознакомьтесь с описанием стендов <a href="#bibliography">[1,2,3]</a>. В
+Приложении А приводятся их фотографии и схема подключения стендов к сети
+питания и к инструментальному компьютеру. Включите в отчет краткое
+описание основных компонентов, содержащихся в стендах.</p>
+<ol>
+<li>
+<p>Изучите описание кристаллов ПЛИС, входящих в состав стендов
+<a href="#bibliography">[4,5]</a>. Включите в отчет описание основных
+ресурсов кристалла.</p>
+</li>
+<li>
+<p>Изучите описание приложения Intel Monitor Program. Включите в отчет
+основные команды для настроек аппаратной части процессорной системы,
+выбора программных компонентов, настроек памяти процессорной
+системы, конфигурирования кристалла, а также для компиляции,
+загрузки и отладки программ, выполняющихся на реализованной в стенде
+процессорной системе.</p>
+</li>
+<li>
+<p>Ознакомьтесь с описанием процессорной системы DE 2-115 Media
+Computer <a href="#bibliography">[6,7,3]</a>. Поместите в отчет карту её
+памяти.</p>
+</li>
+<li>
+<p>Изучите структуру и принцип работы параллельных портов ввода вывода,
+используемых в процессорной системе для подключения красных и
+зеленых светодиодов, HEX индикаторов, кнопочных и ползунковых
+переключателей.</p>
+</li>
+<li>
+<p>Уясните пункты задания, выполняемого в лабораторной работе.</p>
+</li>
+<li>
+<p>Уясните логику работы программы тестирования процессорной системы.
+Её текст представлен в <a href="#%D0%BB%D0%B8%D1%81%D1%82%D0%B8%D0%BD%D0%B3-1-%D1%84%D1%80%D0%B0%D0%B3%D0%BC%D0%B5%D0%BD%D1%82-%D1%84%D0%B0%D0%B9%D0%BB%D0%B0-test_mediacomputers">листинге 1</a> в приложении Б.</p>
+</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="вопросы-для-самоконтроля">Вопросы для самоконтроля<a href="#вопросы-для-самоконтроля" class="hash-link" aria-label="Прямая ссылка на Вопросы для самоконтроля" title="Прямая ссылка на Вопросы для самоконтроля">​</a></h2>
+<ol>
+<li>
+<p>Какие компоненты входят в состав учебного стенда?</p>
+</li>
+<li>
+<p>Каким образом выполняется конфигурирование кристалла ПЛИС учебного
+стенда?</p>
+</li>
+<li>
+<p>Какие компоненты учебного стенда входят в состав процессорной
+системы, используемой в лабораторных работах?</p>
+</li>
+<li>
+<p>Для чего предназначено приложение «Intel Monitor Program»?</p>
+</li>
+<li>
+<p>Каковы возможности приложения IMP?</p>
+</li>
+<li>
+<p>Что представляет собой проект в IMP?</p>
+</li>
+<li>
+<p>Как выбрать процессорную систему для использования в проекте?</p>
+</li>
+<li>
+<p>Как добавить программные файлы в проект?</p>
+</li>
+<li>
+<p>Как загрузить конфигурационный файл в кристалл ПЛИС учебного стенда?</p>
+</li>
+<li>
+<p>Как выполнить компиляцию исходного файла программы?</p>
+</li>
+<li>
+<p>Как загрузить исполняемый файл в оперативную память процессорной
+системы?</p>
+</li>
+<li>
+<p>Какие компоненты памяти используются в процессорной системе?</p>
+</li>
+<li>
+<p>Какие устройства ввода/вывода используются в процессорной системе?</p>
+</li>
+<li>
+<p>Как называется процессор, используемый в процессорной системе? К
+какому типу архитектуры системы команд (АСК) он относится?</p>
+</li>
+<li>
+<p>Как посмотреть содержимое ячеек памяти, портов ввода/вывода
+процессорной системы с помощью приложения IMP?</p>
+</li>
+<li>
+<p>Можно ли изменять содержимое ячеек памяти, портов ввода/вывода
+процессорной системы с помощью приложения IMP? И если да, то как?</p>
+</li>
+<li>
+<p>Какие формы используются в IMP для отображения содержимого ячеек
+памяти, портов ввода/вывода процессорной системы?</p>
+</li>
+<li>
+<p>Можно ли инициализировать область ОП в заданном диапазоне? И если
+да, то как это сделать?</p>
+</li>
+<li>
+<p>Что представляет собой параллельный порт ввода/вывода? Для
+взаимодействия с какими периферийными устройствами в процессорной
+системе он используется.</p>
+</li>
+<li>
+<p>Можно ли вывести на 7-сегментные индикаторы цифры шестнадцатеричной
+системы счисления и как это сделать?</p>
+</li>
+<li>
+<p>Какое количество красных и зеленых светодиодов используется в
+процессорной системе? Как ими управлять?</p>
+</li>
+<li>
+<p>Какое количество кнопочных переключателей используется в
+процессорной системе?</p>
+</li>
+<li>
+<p>Для чего предназначена кнопка KEY0?</p>
+</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="порядок-выполнения-лабораторной-работы">Порядок выполнения лабораторной работы<a href="#порядок-выполнения-лабораторной-работы" class="hash-link" aria-label="Прямая ссылка на Порядок выполнения лабораторной работы" title="Прямая ссылка на Порядок выполнения лабораторной работы">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="часть-1-подключение-стенда-и-запуск-приложения-imp">Часть 1. Подключение стенда и запуск приложения IMP<a href="#часть-1-подключение-стенда-и-запуск-приложения-imp" class="hash-link" aria-label="Прямая ссылка на Часть 1. Подключение стенда и запуск приложения IMP" title="Прямая ссылка на Часть 1. Подключение стенда и запуск приложения IMP">​</a></h3>
+<ol>
+<li>
+<p>Подключите стенд к сети питания с переменным напряжением 220 вольт,
+используя верхний штырьковый разъем на левой стороне стенда и
+соответствующий кабель, входящий в комплект поставки стенда.</p>
+</li>
+<li>
+<p>Подключите стенд к инструментальному компьютеру, используя крайний
+слева разъем USB (типа В) на верхней стороне стенда и
+соответствующий кабель, входящий в комплект поставки стенда. Схема
+подключения показана на <a href="#%D0%9F%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%D0%92">рис 1.3 приложения А.</a></p>
+</li>
+<li>
+<p>Подайте питание в стенд, нажав красную кнопку в верхней левой части
+стенда.</p>
+</li>
+<li>
+<p>Запустите приложение Intel Monitor Program, используя ярлык
+<img src="./assets/imp-icon.png" width="18" alt="imp-icon">на рабочем столе
+инструментального ПК.</p>
+</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="часть-2-создание-нового-проекта-в-imp">Часть 2. Создание нового проекта в IMP<a href="#часть-2-создание-нового-проекта-в-imp" class="hash-link" aria-label="Прямая ссылка на Часть 2. Создание нового проекта в IMP" title="Прямая ссылка на Часть 2. Создание нового проекта в IMP">​</a></h3>
+<ol>
+<li>
+<p>В меню File приложения IMP выполните команду New Project. Появится
+окно New Project Wizard. Задайте в нем имя рабочей папки, в которой
+будет храниться проект и имя проекта. Папка предварительно должна
+быть создана. Следует напомнить, что для корректной работы
+приложения надо избегать в названии пути к созданной папке
+русскоязычных символов. Для перехода к следующему окну нажмите Next.</p>
+</li>
+<li>
+<p>В появившемся окне следует выбрать процессорную систему. Для этого в
+поле Select a system щелкните мышью по значку раскрытия списка. В
+появившемся списке выберите «DE2-70 Media Computer» или «DE2-115
+Media Computer». Обратите внимание, после выбора процессорной
+системы становится активной кнопка «Documentation», размещенная
+правее, с помощью которой можно открыть pdf файл с описанием
+процессорной системы <a href="#bibliography">[6,7,3]</a> от производителя.
+Если в проекте будет использоваться самостоятельно спроектированная
+процессорная система, то в этом случае следует выбрать Custom
+system.</p>
+</li>
+<li>
+<p>В полях System Details появятся названия файлов для конфигурирования
+процессорной системы, если в предыдущем пункте была выбрана заранее
+спроектированная процессорная система из предложенного списка.
+Первый из них, nios_system.sopcinfo содержит описание процессорной
+системы. В нём перечислены компоненты процессорной системы с
+указанием их типов и адресов. Второй файл с расширением .sof
+является конфигурационным файлом, то есть используется для прошивки
+кристалла ПЛИС стенда. В случае использования специализированной
+процессорной системы эти поля следует заполнить самостоятельно,
+указав места размещения соответствующих файлов. Для перехода к
+следующему окну нажмите кнопку Next.</p>
+</li>
+<li>
+<p>В появившемся окне следует определить тип используемой программы.
+Для этого в поле Program Type в предложенном списке выберите тип
+Assembly Program. Используйте опцию Include a sample program with
+the project для включения в следующее поле названий образцов
+программ. Выберите в этом поле программу Test_Media_Computer. Для
+перехода к следующему окну нажмите кнопку Next.</p>
+</li>
+<li>
+<p>В следующем окне следует определить исходные файлы используемой в
+проекте программы. Если в предыдущем пункте была выбрана программа
+из предложенных образцов, то это поле будет заполнено автоматически.
+Если в предыдущем пункте не использовалась опция включения образцов
+программ, то в поле Source files следует добавить имена исходных
+файлов. Для этого можно использовать кнопку Add. В случае выбора
+нескольких исходных файлов их компиляция будет выполняться в том же
+порядке, что и в списке, а результирующему исполняемому файлу будет
+присвоено имя первого файла в списке. В разделе Program options в
+поле Start symbol следует указать имя метки первой выполняемой
+команды программы. Для перехода к следующему окну нажмите Next.</p>
+</li>
+<li>
+<p>В появившемся окне следует определить параметры системы. Если
+используется один программатор, то поля Host сonnection и Processor
+будут заполнены автоматически. В противном случае эти поля следует
+заполнить самостоятельно. В поле Terminal Device следует указать
+JTAG_UART. Это будет означать, что в качестве терминального
+устройства будет использоваться соответствующее окно IMP. Для
+перехода к следующему окну нажмите кнопку Next.</p>
+</li>
+<li>
+<p>В следующем окне надо определить установки памяти процессорной
+системы. По умолчанию Reset vector address равен 0, а Exception
+vector address устанавливается равным 0х20. Если эти адреса должны
+быть изменены, то их следует задать при сборке процессорной системы
+в приложении Platform Designer (PD).</p>
+</li>
+<li>
+<p>Далее в разделе Memory options следует указать, какая память будет
+использоваться для загрузки программ и данных. В поле .text sections
+следует задать память SDRAM/s1, в поле Start offset in device
+следует задать значение 0х400. Это значит, что секция кода будет
+размещена в динамической памяти, с адреса 0х400. В поле .data
+sections также следует задать память SDRAM/s1, а в поле Start offset
+in device следует задать значение 0х400. В случае если использована
+одна и та же память для размещения секции кода и данных, секция
+данных будет размещена сразу же после секции кода. Для завершения
+работы New Project Wizard нажмите кнопку Finish.</p>
+</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="часть-3-реализация-процессорной-системы-в-учебном-стенде-загрузка-и-выполнение-тестовой-программы">Часть 3. Реализация процессорной системы в учебном стенде, загрузка и выполнение тестовой программы<a href="#часть-3-реализация-процессорной-системы-в-учебном-стенде-загрузка-и-выполнение-тестовой-программы" class="hash-link" aria-label="Прямая ссылка на Часть 3. Реализация процессорной системы в учебном стенде, загрузка и выполнение тестовой программы" title="Прямая ссылка на Часть 3. Реализация процессорной системы в учебном стенде, загрузка и выполнение тестовой программы">​</a></h3>
+<ol>
+<li>
+<p>Если в предыдущих пунктах была выбрана процессорная система из
+предложенного списка, то появится окно, предлагающее выполнить
+загрузку конфигурационного файла для процессорной системы в кристалл
+ПЛИС. В противном случае, для загрузки конфигурационного файла
+следует воспользоваться командой Programmer из меню Tools пакета
+Quartus II <a href="#bibliography">[8,9]</a>. Процесс конфигурирования
+кристалла сопровождается свечением голубого светодиода в левой
+верхней части стенда, а загорание второго голубого светодиода
+означает успешное завершение процесса конфигурирования кристалла.</p>
+</li>
+<li>
+<p>Чтобы загрузить программу в память процессорной системы, в основном
+окне IMP следует выполнить команду Actions &gt; Compile &amp; Load или
+использовать пиктограмму
+<img src="./assets/compile-load.png" width="18" alt="compile-load"> на панели инструментов
+Убедитесь, что в основном окне IMP во вкладке <em>Disassembly</em>
+появилась выбранная в пункте 2.5 программа. Причем желтым цветом
+будет выделена первая её команда, помеченная меткой_start. В нашем
+случае, это будет команда с адресом 0х400. Наблюдайте также, что
+значение PC (program counter) в окне отображения и редактирования
+регистров будет равно 0х400.</p>
+</li>
+<li>
+<p>Чтобы запустить программу выполните команду Actions&gt; Continue или
+используйте пиктограмму
+<img src="./assets/continue.png" width="18" alt="continue"> на панели инструментов.
+Проверьте правильность выполнения программы.</p>
+</li>
+<li>
+<p>Если была запущена программа Test Media Computer, то она выполняет
+следующее.</p>
+</li>
+<li>
+<p>Тестирует статическую память. Тестирование заключается в заполнении
+оперативной памяти значениями 0х55555555. Каждый цикл записи
+сопровождается считыванием записанной информации и сравнением с
+эталоном. Затем число-заполнитель меняется на инверсное значение, и
+цикл тестирования продолжается.</p>
+</li>
+<li>
+<p>Отображает бегущую строку на 7-сегментном дисплее. Если ошибок при
+тестировании статической памяти не обнаружено, то строка содержит
+слова &quot;dE2&quot; и &quot;PASSEd&quot;. Если будут обнаружены ошибки, то выведется
+слово &quot;Error&quot;.</p>
+</li>
+<li>
+<p>Включает мерцание зеленых светодиодов. Скорость мерцания светодиодов
+и прокрутки текста на 7-сегментных индикаторах регулируется
+прерываниями от таймера.</p>
+</li>
+<li>
+<p>Подключает переключатели к красным светодиодам.</p>
+</li>
+<li>
+<p>Обрабатывает прерывания от кнопок. Нажатие кнопки KEY1 увеличивает
+скорость прокрутки строки. Нажатие кнопки KEY2 снижает скорость,
+нажатие кнопки KEY3 - останавливает прокрутку.</p>
+</li>
+<li>
+<p>Тестирует порт расширения JP1, если установлены соответствующие
+перемычки.</p>
+</li>
+<li>
+<p>Принимает данные, вводимые в терминальное окно IMP, и отсылает их
+обратно, используя интерфейс JTAG UART, и дополнительно пересылает
+их в com порт.</p>
+</li>
+<li>
+<p>Попробуйте двигать ползунковые переключатели в нижней части стенда.
+Наблюдайте, к каким изменениям в работе стенда это приводит.
+Отразите в отчете.</p>
+</li>
+<li>
+<p>Экспериментально определите, к каким изменениям приводит нажатие
+кнопок KEY1, KEY2, KEY3. Поместите в отчет ваши наблюдения.</p>
+</li>
+<li>
+<p>Установите курсор мыши в терминальное окно IMP в левой нижней части
+экрана. Наберите в этом окне вашу фамилию, имя и отчество, используя
+символы латинского алфавита. Отразите ваши наблюдения в отчете.</p>
+</li>
+<li>
+<p>Остановите выполнение программы. Для этого выполните команду Actions
+&gt; <em>Stop</em> или используйте пиктограмму
+<img src="./assets/stop.png" width="18" alt="stop"> на панели инструментов
+IMP. К каким изменениям в работе стенда это привело?</p>
+</li>
+<li>
+<p>Выполните несколько команд программы по шагам, используя команду
+Actions &gt; Single Step или используйте пиктограмму
+<img src="./assets/single-step.png" width="18" alt="single-step"> на панели инструментов
+IMP. Выполняемая команда будет выделена во вкладке <em>Disassembly</em>
+желтым цветом. Наблюдайте происходящие изменения в регистровом окне
+приложения. Поместите в отчет выполненные по шагам команды и опишите
+произведенные ими действия.</p>
+</li>
+<li>
+<p>Попробуйте изменить содержимое РС в регистровом окне IMP. Наблюдайте
+соответствующие изменения во вкладке <em>Disassembly</em>. Зафиксируйте в
+отчете ваши наблюдения.</p>
+</li>
+<li>
+<p>Выполните двойной щелчок левой кнопкой мыши по некоторой команде во
+вкладке <em>Disassembly</em>. Посмотрите к каким изменениям в открытой
+вкладке и в регистровом окне приведет это действие. Отразите в
+отчете ваши наблюдения.</p>
+</li>
+<li>
+<p>Попробуйте перезапустить программу. Для этого выполните команду
+Actions&gt; Restart или используйте пиктограмму
+<img src="./assets/restart.png" width="18" alt="restart"> на панели инструментов.
+Обратите внимание на то, что данная команда только изменяет значение
+счетчика команд на адрес начала программы. Убедитесь, что это
+произошло.</p>
+</li>
+<li>
+<p>Продолжите выполнение программы, используя
+пиктограмму<img src="./assets/continue.png" width="18" alt="continue"> на панели инструментов.</p>
+</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="часть-4-использование-приложения-imp-для-работы-с-портами-ввода-вывода-процессорной-системы">Часть 4. Использование приложения IMP для работы с портами ввода-вывода процессорной системы<a href="#часть-4-использование-приложения-imp-для-работы-с-портами-ввода-вывода-процессорной-системы" class="hash-link" aria-label="Прямая ссылка на Часть 4. Использование приложения IMP для работы с портами ввода-вывода процессорной системы" title="Прямая ссылка на Часть 4. Использование приложения IMP для работы с портами ввода-вывода процессорной системы">​</a></h3>
+<ol>
+<li>
+<p>Остановите выполнение программы.</p>
+</li>
+<li>
+<p>Откройте вкладку <em>Memory</em> основного окна IMP. Для перехода к нужному
+адресу можно воспользоваться полем Go в верхней части окна.
+Наблюдайте состояние переключателей и кнопок стенда, обращаясь к
+соответствующим портам ввода. Для этого включите опцию Query All
+Devices, используя соответствующее поле в верхней части окна IMP, и
+после изменения состояния переключателей и кнопок нажмите кнопку
+Refresh Memory в верхней правой части окна IMP.</p>
+</li>
+<li>
+<p>С помощью правой кнопки мыши вызовите контекстное меню в открытой
+вкладке и изучите его содержимое. Попробуйте отобразить содержимое
+портов и ОП по байтам, по полусловам и словам. Меняйте количество
+столбцов с выводимой информацией на экране и сам формат выводимых
+данных, порядок отображения в окне, слева направо, и справа налево.
+Экспериментально определите, к каким результатам приводит выполнение
+других команд из контекстного меню.</p>
+</li>
+<li>
+<p>Управляйте зелеными и красными светодиодами, записывая по
+соответствующим адресам портов вывода различные наборы данных.
+Уясните принцип управления светодиодами.</p>
+</li>
+<li>
+<p>Управляйте сегментами индикаторов шестнадцатеричной цифры, подавая
+различные наборы данных в соответствующие порты вывода данных.
+Уясните принцип работы индикаторов и отобразите его в отчете.</p>
+</li>
+<li>
+<p>Сформируйте наборы данных таким образом, чтобы на HEX индикаторах
+высветилась дата вашего рождения в формате дд.мм.гггг. Зафиксируйте
+в отчете выводимые в соответствующие порты наборы данных и фото
+отображаемой на индикаторах даты.</p>
+</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="отчетные-материалы">Отчетные материалы<a href="#отчетные-материалы" class="hash-link" aria-label="Прямая ссылка на Отчетные материалы" title="Прямая ссылка на Отчетные материалы">​</a></h2>
+<p>Отчетные материалы должны содержать:</p>
+<ol>
+<li>
+<p>Цель лабораторной работы.</p>
+</li>
+<li>
+<p>Материалы, связанные с подготовкой к работе, включая теоретическую
+часть и исходные заготовки программ.</p>
+</li>
+<li>
+<p>Информацию по выполнению каждого пункта задания. Причем в отчете
+должны содержаться выполняемые вами действия, наблюдаемые
+результаты, подтверждаемые снимками экрана инструментального ПК или
+фотографиями стенда, и ваши объяснения.</p>
+</li>
+<li>
+<p>Краткое заключение.</p>
+</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="защита-лабораторной-работы">Защита лабораторной работы<a href="#защита-лабораторной-работы" class="hash-link" aria-label="Прямая ссылка на Защита лабораторной работы" title="Прямая ссылка на Защита лабораторной работы">​</a></h2>
+<p>На защите работы студенты должны демонстрировать знания, умения и
+навыки, перечисленные в разделе «Планируемые результаты обучения».</p>
+<p>Студенты должны уметь:</p>
+<ul>
+<li>
+<p>Подключать стенд к инструментальному компьютеру и использовать
+приложение IMP для работы с ним;</p>
+</li>
+<li>
+<p>Создавать новые проекты;</p>
+</li>
+<li>
+<p>Выбирать для них подходящую процессорную систему из предложенного
+списка;</p>
+</li>
+<li>
+<p>Загружать процессорную систему в кристалл ПЛИС учебного стенда;</p>
+</li>
+<li>
+<p>Добавлять к проекту новые программные компоненты;</p>
+</li>
+<li>
+<p>Компилировать и загружать программу в ОП процессорной системы;</p>
+</li>
+<li>
+<p>Использовать вкладку <em>Disassembly</em> для управления программой;</p>
+</li>
+<li>
+<p>Запускать программу, останавливать, выполнять её по шагам и
+перезапускать повторно;</p>
+</li>
+<li>
+<p>Использовать вкладку <em>Memory</em> для наблюдения состояния периферийных
+устройств ввода, таких как ползунковые и кнопочные переключатели и
+управлять устройствами вывода, красными, зелеными светодиодами и HEX
+индикаторами;</p>
+</li>
+<li>
+<p>Показывать на стенде, какие компоненты в него входят, и как они
+используются в лабораторной работе.</p>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="приложение-а-иллюстрации">Приложение А. Иллюстрации<a href="#приложение-а-иллюстрации" class="hash-link" aria-label="Прямая ссылка на Приложение А. Иллюстрации" title="Прямая ссылка на Приложение А. Иллюстрации">​</a></h2>
+<p>Внешний вид стендов DE2-115 и DE2-70 приведен на <a href="#_Ref157706698">рис.
+1.1</a> и <a href="#_Ref159165376">рис. 1.2</a>, соответственно.</p>
+<p><img decoding="async" loading="lazy" alt="Внешний вид стенда DE2-115" src="/docs/assets/images/de2-115-b079924c63fe585a25eaf4ca0a7b0ed9.png" width="1259" height="828" class="img_ev3q"></p>
+<p><em>Рис. 1.1 – Внешний вид
+стенда DE2-115</em></p>
+<p><img decoding="async" loading="lazy" alt="Внешний вид стенда DE2-70" src="/docs/assets/images/de2-70-2f3b199e40fb5436e8d3770e8d8ce215.png" width="1029" height="645" class="img_ev3q"></p>
+<p><em>Рис. 1.2 – Внешний вид
+стенда DE2-70</em></p>
+<p><img decoding="async" loading="lazy" alt="Схема подключения стенда к сети питания и ПК" src="/docs/assets/images/connection-scheme-b5ee44b3e9bf7e30df8faf54f19f8213.png" width="1458" height="1373" class="img_ev3q"></p>
+<p><em>Рис. 1.3 - Схема подключения стенда к сети питания и ПК</em></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="приложение-б-листинги-кода">Приложение Б. Листинги кода<a href="#приложение-б-листинги-кода" class="hash-link" aria-label="Прямая ссылка на Приложение Б. Листинги кода" title="Прямая ссылка на Приложение Б. Листинги кода">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="листинг-1-фрагмент-файла-test_media_computers">Листинг 1. Фрагмент файла <code>test_Media_Computer.s</code><a href="#листинг-1-фрагмент-файла-test_media_computers" class="hash-link" aria-label="Прямая ссылка на листинг-1-фрагмент-файла-test_media_computers" title="Прямая ссылка на листинг-1-фрагмент-файла-test_media_computers">​</a></h3>
+<p>Файл вынесен отдельно: <a href="/docs/assets/files/test_Media_Computer-4c6362ec8cfb1b7fed9d047ff9207b59.s" target="_blank"><code>listings/test_Media_Computer.s</code></a>.</p>
+<div class="language-asm codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-asm codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">.include &quot;address_map.s&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.equ RIBBON_CABLE_INSTALLED, 0</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">/* Программа демонстрирует возможности процессорной системы.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Она выполняет следующие действия:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">1. Тестирует статическую память.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">2. Прокручивает текст на 7-сегментном дисплее. Если ошибок при тестировании</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   статической памяти не обнаружено, то текст содержит слова &quot;dE2&quot; и &quot;PASSEd&quot;.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   Если были обнаружены ошибки, то выводится слово &quot;Error&quot;.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">3. Мигает зелеными светодиодами. Скорость мигания светодиодов и прокрутки текста</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   на 7-сегментных индикаторах регулируется кнопками.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">4. Подключает переключатели к красным светодиодам.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">5. Обрабатывает прерывания от кнопок. Нажатие KEY1 увеличивает скорость</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   прокрутки текста. Нажатие KEY2 снижает скорость, KEY3 останавливает прокрутку.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">6. Тестирует порты расширения JP1, JP2.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">7. Отсылает в терминальное окно IMP инструментального ПК данные, полученные</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   по интерфейсу JTAG UART.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">*/</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.text</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.global _start</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">_start:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    /* инициализируем регистры sp и fp */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movia   sp, 0x07FFFFFC      # Стек начинается с адреса последнего слова SDRAM</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    mov     fp, sp</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    /* инициализируем буфер 7-сегментных индикаторов */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movia   r16, DISPLAY_BUFFER</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movi    r17, 0xde2</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    stw     r17, 0(r16)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    stw     zero, 4(r16)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    stw     zero, 8(r16)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    /* инициализируем зеленые светодиоды */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movia   r2, 0x55555555</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movia   r16, GREEN_LED_PATTERN</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    stw     r2, 0(r16)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    /* инициализируем счетчик задержки */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movia   r16, EIGHT_SEC</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    stw     zero, 0(r16)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    /* инициализируем переключатели */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movia   r16, DISPLAY_TOGGLE</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    stw     zero, 0(r16)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    /* направление передачи: 0 - влево, 1 - вправо */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movi    r2, 1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movia   r16, SHIFT_DIRECTION</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    stw     r2, 0(r16)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    /* запускаем таймер и разрешаем его прерывания */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movia   r16, INTERVAL_TIMER_BASE</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movi    r15, 0b0111         # START = 1, CONT = 1, ITO = 1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    sthio   r15, 4(r16)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    /* разрешаем прерывания от кнопок KEY3, KEY2, KEY1 */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movia   r16, PUSHBUTTON_BASE</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movi    r15, 0b01110        # устанавливаем биты маски прерывания в 1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    stwio   r15, 8(r16)         # заносим в регистр маски</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    /* разрешаем прерывания процессора от кнопок и таймера */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movi    r15, 0b011</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.if RIBBON_CABLE_INSTALLED</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ori     r15, r15, 0b1000000000000 # также разрешаем прерывания для JP2</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.endif</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    wrctl   ienable, r15</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movi    r15, 1              # разрешаем прерывания текущей программы</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    wrctl   status, r15</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    /* цикл тестирования статической памяти и обновления HEX-индикаторов */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movia   r15, 0x55555555</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movia   r17, SRAM_END</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">DO_DISPLAY:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movia   r16, SRAM_BASE</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movia   r17, SRAM_END</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">MEM_LOOP:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    call    UPDATE_HEX_DISPLAY</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    call    UPDATE_RED_LED</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    call    UPDATE_UARTS</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.if RIBBON_CABLE_INSTALLED</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    call    TEST_EXPANSION_PORTS</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    beq     r2, zero, SHOW_ERROR</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.endif</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    stw     r15, 0(r16)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ldw     r14, 0(r16)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    bne     r14, r15, SHOW_ERROR</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    addi    r16, r16, 4</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ble     r16, r17, MEM_LOOP</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    xori    r15, r15, 0xFFFF</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    xorhi   r15, r15, 0xFFFF</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    /* меняет буфер 7-сегментных индикаторов приблизительно каждые 8 секунд */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movia   r16, EIGHT_SEC</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ldw     r17, 0(r16)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movi    r14, 80</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ble     r17, r14, DO_DISPLAY</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    stw     zero, 0(r16)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    /* toggle display of dE2 and PASSEd */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movia   r16, DISPLAY_TOGGLE</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ldw     r17, 0(r16)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    beq     r17, zero, SHOW_PASSED</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    stw     zero, 0(r16)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    /* показать &quot;dE2&quot; */</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movia   r16, DISPLAY_BUFFER</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movi    r17, 0xdE2</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    stw     r17, 0(r16)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    stw     zero, 4(r16)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    stw     zero, 8(r16)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    br      DO_DISPLAY</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">SHOW_PASSED:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movi    r17, 1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    stw     r17, 0(r16)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movia   r16, DISPLAY_BUFFER</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movia   r17, 0xbA55Ed</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    stw     r17, 0(r16)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    stw     zero, 4(r16)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    stw     zero, 8(r16)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    br      DO_DISPLAY</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">SHOW_ERROR:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movia   r16, DISPLAY_BUFFER</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    movia   r17, 0xe7787</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    stw     r17, 0(r16)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    stw     zero, 4(r16)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    stw     zero, 8(r16)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">DO_ERROR:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    call    UPDATE_HEX_DISPLAY</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    br      DO_ERROR</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Скопировать в буфер обмена" title="Скопировать" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="листинг-2-файл-address_maps">Листинг 2. Файл <code>address_map.s</code><a href="#листинг-2-файл-address_maps" class="hash-link" aria-label="Прямая ссылка на листинг-2-файл-address_maps" title="Прямая ссылка на листинг-2-файл-address_maps">​</a></h3>
+<p>Файл вынесен отдельно: <a href="/docs/assets/files/address_map-33ab4b1d7ef134cdf7a3e99917c39fe0.s" target="_blank"><code>listings/address_map.s</code></a>.</p>
+<div class="language-asm codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-asm codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">.equ SRAM_BASE,          0x8000000</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.equ SRAM_END,           0x81FFFFF</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.equ RED_LED_BASE,       0x10000000</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.equ GREEN_LED_BASE,     0x10000010</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.equ HEX3_HEX0_BASE,     0x10000020</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.equ HEX7_HEX4_BASE,     0x10000030</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.equ SLIDER_SWITCH_BASE, 0x10000040</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.equ PUSHBUTTON_BASE,    0x10000050</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.equ JP1_EXPANSION_BASE, 0x10000060</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.equ JP2_EXPANSION_BASE, 0x10000070</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.equ JTAG_UART_BASE,     0x10001000</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.equ UART_BASE,          0x10001010</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.equ INTERVAL_TIMER_BASE,0x10002000</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Скопировать в буфер обмена" title="Скопировать" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="список-источников">Список источников<a href="#список-источников" class="hash-link" aria-label="Прямая ссылка на Список источников" title="Прямая ссылка на Список источников">​</a></h2>
+<blockquote>
+<p>В исходном DOCX ссылки обозначены номерами <code>[1]</code> - <code>[9]</code>, но сами URL и библиографическое описание в файле отсутствуют. Перед публикацией замените этот блок на реальные источники или добавьте отдельный файл <code>references.md</code>.</p>
+</blockquote></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/efremovnv/docs/edit/main/website/docs/computer-organization/labs-sem6/lr1_new.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Отредактировать эту страницу</a></div><div class="col lastUpdated_JAkA"><span class="theme-last-updated">Последнее обновление<!-- --> <b><time datetime="2026-05-27T15:28:45.000Z" itemprop="dateModified">27 мая 2026 г.</time></b></span></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Страница документа"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/labs/computer-organization/labs-sem6/lab6"><div class="pagination-nav__sublabel">Предыдущая страница</div><div class="pagination-nav__label">ЛР №6 Прерывания</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/labs/computer-organization/labs-sem6/lr2_new"><div class="pagination-nav__sublabel">Следующая страница</div><div class="pagination-nav__label">Лабораторная работа 2. Архитектура системы команд процессора NIOS II</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#содержание" class="table-of-contents__link toc-highlight">Содержание</a></li><li><a href="#цель-работы" class="table-of-contents__link toc-highlight">Цель работы</a></li><li><a href="#объекты-изучения" class="table-of-contents__link toc-highlight">Объекты изучения</a></li><li><a href="#планируемые-результаты-обучения" class="table-of-contents__link toc-highlight">Планируемые результаты обучения</a></li><li><a href="#используемые-файлы" class="table-of-contents__link toc-highlight">Используемые файлы</a></li><li><a href="#подготовка-к-лабораторной-работе" class="table-of-contents__link toc-highlight">Подготовка к лабораторной работе</a></li><li><a href="#вопросы-для-самоконтроля" class="table-of-contents__link toc-highlight">Вопросы для самоконтроля</a></li><li><a href="#порядок-выполнения-лабораторной-работы" class="table-of-contents__link toc-highlight">Порядок выполнения лабораторной работы</a><ul><li><a href="#часть-1-подключение-стенда-и-запуск-приложения-imp" class="table-of-contents__link toc-highlight">Часть 1. Подключение стенда и запуск приложения IMP</a></li><li><a href="#часть-2-создание-нового-проекта-в-imp" class="table-of-contents__link toc-highlight">Часть 2. Создание нового проекта в IMP</a></li><li><a href="#часть-3-реализация-процессорной-системы-в-учебном-стенде-загрузка-и-выполнение-тестовой-программы" class="table-of-contents__link toc-highlight">Часть 3. Реализация процессорной системы в учебном стенде, загрузка и выполнение тестовой программы</a></li><li><a href="#часть-4-использование-приложения-imp-для-работы-с-портами-ввода-вывода-процессорной-системы" class="table-of-contents__link toc-highlight">Часть 4. Использование приложения IMP для работы с портами ввода-вывода процессорной системы</a></li></ul></li><li><a href="#отчетные-материалы" class="table-of-contents__link toc-highlight">Отчетные материалы</a></li><li><a href="#защита-лабораторной-работы" class="table-of-contents__link toc-highlight">Защита лабораторной работы</a></li><li><a href="#приложение-а-иллюстрации" class="table-of-contents__link toc-highlight">Приложение А. Иллюстрации</a></li><li><a href="#приложение-б-листинги-кода" class="table-of-contents__link toc-highlight">Приложение Б. Листинги кода</a><ul><li><a href="#листинг-1-фрагмент-файла-test_media_computers" class="table-of-contents__link toc-highlight">Листинг 1. Фрагмент файла <code>test_Media_Computer.s</code></a></li><li><a href="#листинг-2-файл-address_maps" class="table-of-contents__link toc-highlight">Листинг 2. Файл <code>address_map.s</code></a></li></ul></li><li><a href="#список-источников" class="table-of-contents__link toc-highlight">Список источников</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">efremovnv</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/">Начало</a></li></ul></div><div class="col footer__col"><div class="footer__title">Ресурсы</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/efremovnv/docs" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 efremovnv. Создано с помощью Docusaurus.</div></div></div></footer></div>
+</body>
+</html>
